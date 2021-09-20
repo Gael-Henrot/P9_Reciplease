@@ -8,49 +8,67 @@
 import UIKit
 
 class IngredientViewController: UIViewController {
+    
+    //MARK: - Properties
+    
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var ingredientsTextView: UITextView!
     
     let initialAdvice: String = "Add a new ingredient in the list to begin the search. No need to use plural."
-    var ingredientListToDisplay: String = ""
+    var ingredientsListToDisplay: String = ""
+    var ingredientsList = [String]()
+    
+    //MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ingredientsTextView.text = initialAdvice
-        
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func tappedAddButton() {
         addAnIngredient()
         refreshIngredientTextView()
+        ingredientTextField.text = nil
     }
     
     @IBAction func tappedClearButton() {
-        IngredientService.shared.removeAllIngredients()
+        ingredientsList.removeAll()
         refreshIngredientTextView()
     }
     
     @IBAction func tappedSearchButton() {
+        performSegue(withIdentifier: "segueToRecipesResearchResult", sender: nil)
     }
     
     private func addAnIngredient() {
         guard let ingredient = ingredientTextField.text else { return }
-        IngredientService.shared.add(ingredient: ingredient)
+        guard ingredient != "" else {
+            return
+        }
+        if ingredientsList.contains(ingredient) {
+            return
+        } else {
+        ingredientsList.append(ingredient)
+        }
     }
     
     private func refreshIngredientTextView() {
-        ingredientListToDisplay.removeAll()
-        for ingredient in IngredientService.shared.ingredients {
-            ingredientListToDisplay.append("- \(ingredient)\n")
+        ingredientsListToDisplay.removeAll()
+        for ingredient in ingredientsList {
+            ingredientsListToDisplay.append("- \(ingredient)\n")
         }
-        if IngredientService.shared.ingredients.isEmpty {
+        if ingredientsList.isEmpty {
             ingredientsTextView.text = initialAdvice
         } else {
-            ingredientsTextView.text = ingredientListToDisplay
+            ingredientsTextView.text = ingredientsListToDisplay
         }
-        print(IngredientService.shared.ingredients)
-        print(ingredientListToDisplay)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToRecipesResearchResult" {
+            let recipesResearchResultVC = segue.destination as! RecipeViewController
+            recipesResearchResultVC.ingredientsList = ingredientsList
+        }
     }
     
     /*

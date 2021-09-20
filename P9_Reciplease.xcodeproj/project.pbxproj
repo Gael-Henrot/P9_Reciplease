@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,8 +14,28 @@
 		7C80A0A326E7B3F0007D4D25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C80A0A226E7B3F0007D4D25 /* Assets.xcassets */; };
 		7C80A0A626E7B3F0007D4D25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C80A0A426E7B3F0007D4D25 /* LaunchScreen.storyboard */; };
 		7C80A0B226E7C89D007D4D25 /* IngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C80A0B126E7C89D007D4D25 /* IngredientViewController.swift */; };
-		7C80A0B426E7C9AF007D4D25 /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C80A0B326E7C9AF007D4D25 /* IngredientService.swift */; };
+		7C80A0B626E8C3F8007D4D25 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C80A0B526E8C3F8007D4D25 /* NetworkService.swift */; };
+		7C80A0BE26E8C745007D4D25 /* P9_RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C80A0BD26E8C745007D4D25 /* P9_RecipleaseTests.swift */; };
+		7CBE8F9126EF70B10086976C /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9026EF70B10086976C /* RecipeList.swift */; };
+		7CBE8F9326EF7A9F0086976C /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9226EF7A9F0086976C /* RecipeViewController.swift */; };
+		7CBE8F9526EF7ED20086976C /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9426EF7ED20086976C /* RecipeTableViewCell.swift */; };
+		7CBE8F9726F1DCBF0086976C /* APIKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9626F1DCBF0086976C /* APIKeys.json */; };
+		7CBE8F9926F226190086976C /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9826F226190086976C /* RecipeData.swift */; };
+		7CBE8F9B26F359200086976C /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9A26F359200086976C /* APIKeys.swift */; };
+		7CBE8F9E26F4C1D40086976C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9D26F4C1D40086976C /* StringExtension.swift */; };
+		7CBE8FA026F875AC0086976C /* NetworkServiceTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9F26F875AC0086976C /* NetworkServiceTestCases.swift */; };
+		BE348C224AE3B0DF7B837BD9 /* Pods_P9_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E9D6F861B1A67C00A502E2 /* Pods_P9_Reciplease.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7C80A0C026E8C745007D4D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7C80A08B26E7B3EE007D4D25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7C80A09226E7B3EE007D4D25;
+			remoteInfo = P9_Reciplease;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7C80A09326E7B3EE007D4D25 /* P9_Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P9_Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,11 +47,33 @@
 		7C80A0A526E7B3F0007D4D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C80A0A726E7B3F0007D4D25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C80A0B126E7C89D007D4D25 /* IngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewController.swift; sourceTree = "<group>"; };
-		7C80A0B326E7C9AF007D4D25 /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
+		7C80A0B526E8C3F8007D4D25 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		7C80A0BB26E8C745007D4D25 /* P9_RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P9_RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C80A0BD26E8C745007D4D25 /* P9_RecipleaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P9_RecipleaseTests.swift; sourceTree = "<group>"; };
+		7C80A0BF26E8C745007D4D25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CBE8F9026EF70B10086976C /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
+		7CBE8F9226EF7A9F0086976C /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		7CBE8F9426EF7ED20086976C /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		7CBE8F9626F1DCBF0086976C /* APIKeys.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APIKeys.json; sourceTree = "<group>"; };
+		7CBE8F9826F226190086976C /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
+		7CBE8F9A26F359200086976C /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		7CBE8F9D26F4C1D40086976C /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		7CBE8F9F26F875AC0086976C /* NetworkServiceTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTestCases.swift; sourceTree = "<group>"; };
+		A3E9D6F861B1A67C00A502E2 /* Pods_P9_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P9_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A946D1F1618BE4C90A42DE59 /* Pods-P9_Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P9_Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-P9_Reciplease/Pods-P9_Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
+		AD08E95D5635F855507B72C0 /* Pods-P9_Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P9_Reciplease.release.xcconfig"; path = "Target Support Files/Pods-P9_Reciplease/Pods-P9_Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7C80A09026E7B3EE007D4D25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE348C224AE3B0DF7B837BD9 /* Pods_P9_Reciplease.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7C80A0B826E8C745007D4D25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,11 +83,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B7258A51ABF5DB02D6E9C83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A3E9D6F861B1A67C00A502E2 /* Pods_P9_Reciplease.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7C80A08A26E7B3EE007D4D25 = {
 			isa = PBXGroup;
 			children = (
 				7C80A09526E7B3EE007D4D25 /* P9_Reciplease */,
+				7C80A0BC26E8C745007D4D25 /* P9_RecipleaseTests */,
 				7C80A09426E7B3EE007D4D25 /* Products */,
+				C55A151E7BC3D9C45477BC62 /* Pods */,
+				2B7258A51ABF5DB02D6E9C83 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				7C80A09326E7B3EE007D4D25 /* P9_Reciplease.app */,
+				7C80A0BB26E8C745007D4D25 /* P9_RecipleaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +120,7 @@
 				7C80A0AD26E7B3F5007D4D25 /* Controller */,
 				7C80A0A726E7B3F0007D4D25 /* Info.plist */,
 				7C80A09F26E7B3EE007D4D25 /* P9_Reciplease.xcdatamodeld */,
+				7CBE8F9C26F4C1B90086976C /* Extensions */,
 			);
 			path = P9_Reciplease;
 			sourceTree = "<group>";
@@ -74,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				7C80A0B126E7C89D007D4D25 /* IngredientViewController.swift */,
+				7CBE8F9226EF7A9F0086976C /* RecipeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -84,6 +140,7 @@
 				7C80A0A226E7B3F0007D4D25 /* Assets.xcassets */,
 				7C80A0A426E7B3F0007D4D25 /* LaunchScreen.storyboard */,
 				7C80A09C26E7B3EE007D4D25 /* Main.storyboard */,
+				7CBE8F9426EF7ED20086976C /* RecipeTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -91,7 +148,10 @@
 		7C80A0AF26E7B40D007D4D25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7C80A0B326E7C9AF007D4D25 /* IngredientService.swift */,
+				7C80A0B526E8C3F8007D4D25 /* NetworkService.swift */,
+				7CBE8F9026EF70B10086976C /* RecipeList.swift */,
+				7CBE8F9826F226190086976C /* RecipeData.swift */,
+				7CBE8F9A26F359200086976C /* APIKeys.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -101,8 +161,36 @@
 			children = (
 				7C80A09626E7B3EE007D4D25 /* AppDelegate.swift */,
 				7C80A09826E7B3EE007D4D25 /* SceneDelegate.swift */,
+				7CBE8F9626F1DCBF0086976C /* APIKeys.json */,
 			);
 			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		7C80A0BC26E8C745007D4D25 /* P9_RecipleaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				7C80A0BD26E8C745007D4D25 /* P9_RecipleaseTests.swift */,
+				7C80A0BF26E8C745007D4D25 /* Info.plist */,
+				7CBE8F9F26F875AC0086976C /* NetworkServiceTestCases.swift */,
+			);
+			path = P9_RecipleaseTests;
+			sourceTree = "<group>";
+		};
+		7CBE8F9C26F4C1B90086976C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7CBE8F9D26F4C1D40086976C /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C55A151E7BC3D9C45477BC62 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A946D1F1618BE4C90A42DE59 /* Pods-P9_Reciplease.debug.xcconfig */,
+				AD08E95D5635F855507B72C0 /* Pods-P9_Reciplease.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,9 +200,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C80A0AA26E7B3F0007D4D25 /* Build configuration list for PBXNativeTarget "P9_Reciplease" */;
 			buildPhases = (
+				F9EFCD9B9FCC7F312A446711 /* [CP] Check Pods Manifest.lock */,
 				7C80A08F26E7B3EE007D4D25 /* Sources */,
 				7C80A09026E7B3EE007D4D25 /* Frameworks */,
 				7C80A09126E7B3EE007D4D25 /* Resources */,
+				F9FAAC89081C6C9AD1046C4D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,6 +214,24 @@
 			productName = P9_Reciplease;
 			productReference = 7C80A09326E7B3EE007D4D25 /* P9_Reciplease.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7C80A0BA26E8C745007D4D25 /* P9_RecipleaseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7C80A0C226E8C745007D4D25 /* Build configuration list for PBXNativeTarget "P9_RecipleaseTests" */;
+			buildPhases = (
+				7C80A0B726E8C745007D4D25 /* Sources */,
+				7C80A0B826E8C745007D4D25 /* Frameworks */,
+				7C80A0B926E8C745007D4D25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7C80A0C126E8C745007D4D25 /* PBXTargetDependency */,
+			);
+			name = P9_RecipleaseTests;
+			productName = P9_RecipleaseTests;
+			productReference = 7C80A0BB26E8C745007D4D25 /* P9_RecipleaseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -137,10 +245,14 @@
 					7C80A09226E7B3EE007D4D25 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
+					7C80A0BA26E8C745007D4D25 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 7C80A09226E7B3EE007D4D25;
+					};
 				};
 			};
 			buildConfigurationList = 7C80A08E26E7B3EE007D4D25 /* Build configuration list for PBXProject "P9_Reciplease" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -153,6 +265,7 @@
 			projectRoot = "";
 			targets = (
 				7C80A09226E7B3EE007D4D25 /* P9_Reciplease */,
+				7C80A0BA26E8C745007D4D25 /* P9_RecipleaseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -164,26 +277,99 @@
 			files = (
 				7C80A0A626E7B3F0007D4D25 /* LaunchScreen.storyboard in Resources */,
 				7C80A0A326E7B3F0007D4D25 /* Assets.xcassets in Resources */,
+				7CBE8F9726F1DCBF0086976C /* APIKeys.json in Resources */,
 				7C80A09E26E7B3EE007D4D25 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7C80A0B926E8C745007D4D25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F9EFCD9B9FCC7F312A446711 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-P9_Reciplease-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9FAAC89081C6C9AD1046C4D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-P9_Reciplease/Pods-P9_Reciplease-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-P9_Reciplease/Pods-P9_Reciplease-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-P9_Reciplease/Pods-P9_Reciplease-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7C80A08F26E7B3EE007D4D25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CBE8F9B26F359200086976C /* APIKeys.swift in Sources */,
+				7CBE8F9326EF7A9F0086976C /* RecipeViewController.swift in Sources */,
+				7CBE8F9526EF7ED20086976C /* RecipeTableViewCell.swift in Sources */,
 				7C80A09726E7B3EE007D4D25 /* AppDelegate.swift in Sources */,
 				7C80A0B226E7C89D007D4D25 /* IngredientViewController.swift in Sources */,
-				7C80A0B426E7C9AF007D4D25 /* IngredientService.swift in Sources */,
+				7CBE8F9126EF70B10086976C /* RecipeList.swift in Sources */,
 				7C80A09926E7B3EE007D4D25 /* SceneDelegate.swift in Sources */,
+				7CBE8F9E26F4C1D40086976C /* StringExtension.swift in Sources */,
+				7CBE8F9926F226190086976C /* RecipeData.swift in Sources */,
+				7C80A0B626E8C3F8007D4D25 /* NetworkService.swift in Sources */,
 				7C80A0A126E7B3EE007D4D25 /* P9_Reciplease.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7C80A0B726E8C745007D4D25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CBE8FA026F875AC0086976C /* NetworkServiceTestCases.swift in Sources */,
+				7C80A0BE26E8C745007D4D25 /* P9_RecipleaseTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7C80A0C126E8C745007D4D25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7C80A09226E7B3EE007D4D25 /* P9_Reciplease */;
+			targetProxy = 7C80A0C026E8C745007D4D25 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7C80A09C26E7B3EE007D4D25 /* Main.storyboard */ = {
@@ -323,6 +509,7 @@
 		};
 		7C80A0AB26E7B3F0007D4D25 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A946D1F1618BE4C90A42DE59 /* Pods-P9_Reciplease.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -341,6 +528,7 @@
 		};
 		7C80A0AC26E7B3F0007D4D25 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD08E95D5635F855507B72C0 /* Pods-P9_Reciplease.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -354,6 +542,44 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7C80A0C326E8C745007D4D25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = P9_RecipleaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ExpleoFrance.Henrot.Gael.P9-RecipleaseTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P9_Reciplease.app/P9_Reciplease";
+			};
+			name = Debug;
+		};
+		7C80A0C426E8C745007D4D25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = P9_RecipleaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ExpleoFrance.Henrot.Gael.P9-RecipleaseTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P9_Reciplease.app/P9_Reciplease";
 			};
 			name = Release;
 		};
@@ -374,6 +600,15 @@
 			buildConfigurations = (
 				7C80A0AB26E7B3F0007D4D25 /* Debug */,
 				7C80A0AC26E7B3F0007D4D25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7C80A0C226E8C745007D4D25 /* Build configuration list for PBXNativeTarget "P9_RecipleaseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C80A0C326E8C745007D4D25 /* Debug */,
+				7C80A0C426E8C745007D4D25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

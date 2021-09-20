@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Cuisine-d01.jpg039un-jour-Traiteur-Plat-du-jour-01-1700x563.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Cuisine-d01.jpg039un-jour-Traiteur-Plat-du-jour-01-1700x563@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Cuisine-d01.jpg039un-jour-Traiteur-Plat-du-jour-01-1700x563@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
