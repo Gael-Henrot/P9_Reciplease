@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 
 class NetworkService {
-
-//MARK: - Methods
+    
+    //MARK: - Methods
     
     /// Asks for a list of recipe from the API Edanam and provides an array of RecipeData.
     func fetchRecipes(with ingredientsList: [String], completionHandler: @escaping (Result<[RecipeData], NetworkError>) -> Void) {
@@ -29,50 +29,62 @@ class NetworkService {
         AF.request(url, method: .get, parameters: parameters)
             .validate()
             .responseDecodable(of: RecipeList.self) { response in
-                print("Status code: \(response.response!.statusCode)")
-                guard response.response?.statusCode == 200 else {
-                    return completionHandler(.failure(.wrongStatusCode))
-                }
-                guard let recipeList = response.value else {
-                    return completionHandler(.failure(.noRecipeData)) }
-//                var imageDatas:Data?
-                for eachRecipe in recipeList.hits {
-                    let imageData = eachRecipe.recipe.image.data
-                    guard let image = imageData else {
-                        return completionHandler(.failure(.noImageData))
-                    }
-//                    self.getRecipeImage(from: eachRecipe.recipe.image) { response in
-//                        switch response {
-//                        case .success(let imageData):
-//                            imageDatas = imageData
-//                        case .failure(.noImageData):
-//                            return completionHandler(.failure(.noImageData))
-//                        }
+                switch response.result {
+                                case .failure(_):
+                                    completionHandler(.failure(.noRecipeFound))
+//                                    switch error {
+//                                    case .ResponseValidationFailureReason.unacceptableStatusCode(let statusCode):
+//
+//                                    default:
+//                                    }
+                                case .success(let recipeList):
+                                    guard !recipeList.recipesList.isEmpty else {
+                                        return completionHandler(.failure(.noRecipeFound))
+                                    }
+                                    for eachRecipe in recipeList.recipesList {
+                                        guard let recipe = eachRecipe?.recipe else {
+                                            return completionHandler(.failure(.noRecipeFound))
+                                        }
 
-                            
-                            let recipeData = RecipeData(recipeTitle: eachRecipe.recipe.label, recipeImage: image, ingredientsList: [], detailedIngredientsList: eachRecipe.recipe.ingredientLines, executionTime: String(eachRecipe.recipe.totalTime), rank: nil, originalSourceURL: eachRecipe.recipe.url)
-                            recipesList.append(recipeData)
-//                        }
-                }
-                guard !recipesList.isEmpty else {
-                    return completionHandler(.failure(.noRecipeFound))
-                }
-                print("Nombre de recettes trouvées: \(recipesList.count)")
-                completionHandler(.success(recipesList))
+                                        let recipeData = RecipeData(recipeTitle: recipe.title, recipeImage: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
+                                        recipesList.append(recipeData)
+                                    }
+                                    guard !recipesList.isEmpty else {
+                                        return completionHandler(.failure(.noRecipeFound))
+                                    }
+                                    print("Nombre de recettes trouvées: \(recipesList.count)")
+                                    completionHandler(.success(recipesList))
+                                }
+//                guard response.error == nil else {
+//                    return completionHandler(.failure(.requestError))
+//                }
+//                print("Status code: \(response.response!.statusCode)")
+//                guard response.response?.statusCode == 200 else {
+//                    return completionHandler(.failure(.wrongStatusCode))
+//                }
+//                guard let recipeList = response.value else {
+//                    return completionHandler(.failure(.noRecipeData)) }
+//                guard !recipeList.recipesList.isEmpty else {
+//                    return completionHandler(.failure(.noRecipeFound))
+//                }
+//                for eachRecipe in recipeList.recipesList {
+//                    guard let recipe = eachRecipe?.recipe else {
+//                        return completionHandler(.failure(.noRecipeFound))
+//                    }
+//                    //                    guard let imageData = recipe.image?.data else {
+//                    //                        return
+//                    //                    }
+//
+//                    let recipeData = RecipeData(recipeTitle: recipe.title, recipeImage: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
+//                    recipesList.append(recipeData)
+//                }
+//                guard !recipesList.isEmpty else {
+//                    return completionHandler(.failure(.noRecipeFound))
+//                }
+//                print("Nombre de recettes trouvées: \(recipesList.count)")
+//                completionHandler(.success(recipesList))
             }
     }
-    
-//    private func getRecipeImage(from url: String, completionHandler: @escaping (Result<Data, ImageError>) -> Void) {
-//        AF.request(url, method: .get)
-//            .validate()
-//            .responseData() { response in
-//                print(url)
-//                print("Status code image: \(response.response!.statusCode)")
-//                guard let imageData = response.value else
-//                { return completionHandler(.failure(.noImageData)) }
-//                return completionHandler(.success(imageData))
-//            }
-//    }
 }
 
 /// Allows to decode the edanamAPIKey from the APIKeys.json file.
@@ -81,15 +93,15 @@ extension NetworkService {
         let bundle = Bundle(for: NetworkService.self)
         let url = bundle.url(forResource: "APIKeys", withExtension: "json")
         let data = try? Data(contentsOf: url!)
-        let APIKeys = try? JSONDecoder().decode(APIKeys.self, from: data!)
-        return APIKeys!.edanamAPIKey
+        guard let APIKeys = try? JSONDecoder().decode(APIKeys.self, from: data!) else {
+            print("No API key found. Please verify or create your APIKeys.json file.")
+            return "No-API-key-found"
+        }
+        return APIKeys.edanamAPIKey
     }
 }
 
 /// Lists possible errors that may occur during a network request.
 enum NetworkError: Error {
-    case wrongStatusCode, noRecipeData, noImageData, noRecipeFound
+    case wrongStatusCode, requestError, noRecipeData, noImageData, noRecipeFound
 }
-//enum ImageError: Error {
-//    case noImageData
-//}

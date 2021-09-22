@@ -3,4 +3,9 @@ use_frameworks!
 
 target 'P9_Reciplease' do
   pod 'Alamofire', '~> 5.0'
+  pod 'ProgressHUD'
+end
+
+target 'P9_RecipleaseTests' do
+  pod 'Alamofire', '~> 5.0'
 end

@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
-// This is the data model structure needed by the application.
+// This is the condensed data model structure needed by the application.
 
 struct RecipeData {
     let recipeTitle: String
-    let recipeImage: Data?
+    let recipeImage: Data
     let ingredientsList: [String]
     let detailedIngredientsList: [String]
-    let executionTime: String?
-    let rank: String?
-    let originalSourceURL: String
+    let executionTime: String
+    let rank: String
+    let originSourceURL: String
 }

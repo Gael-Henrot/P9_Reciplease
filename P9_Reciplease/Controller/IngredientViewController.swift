@@ -37,14 +37,16 @@ class IngredientViewController: UIViewController {
     }
     
     @IBAction func tappedSearchButton() {
+        guard !ingredientsList.isEmpty else {
+            presentSpecificAlert(error: .noIngredientProvided)
+            return
+        }
         performSegue(withIdentifier: "segueToRecipesResearchResult", sender: nil)
     }
     
     private func addAnIngredient() {
-        guard let ingredient = ingredientTextField.text else { return }
-        guard ingredient != "" else {
-            return
-        }
+        guard let ingredient = ingredientTextField.text, ingredient != "" else { return }
+       
         if ingredientsList.contains(ingredient) {
             return
         } else {

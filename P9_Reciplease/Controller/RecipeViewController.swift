@@ -6,39 +6,57 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class RecipeViewController: UITableViewController {
+    
     let networkService = NetworkService()
     var ingredientsList = [String]()
     var recipesList = [RecipeData]()
+    var selectedRecipe: RecipeData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ProgressHUD.show("Loading the recipes...")
         networkService.fetchRecipes(with: ingredientsList) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let recipeDataList):
                 self.recipesList = recipeDataList
                 print("Nombre de lignes RecipeVC: \(recipeDataList.count)")
-//                print(self.recipesList[0].recipeTitle)
             
             case .failure(.wrongStatusCode):
                 print("Wrong status error")
+            case .failure(.requestError):
+                self.dismiss(animated: true, completion: nil)
+                self.presentSpecificAlert(error: .requestError)
             case .failure(.noRecipeData):
                 print("No recipe data received")
             case .failure(.noImageData):
                 print("No image data received")
             case .failure(.noRecipeFound):
-                print("No recipe found")
+                self.presentSpecificAlert(error: .noRecipeFound)
             }
             self.tableView.reloadData()
+            ProgressHUD.dismiss()
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Details") as? DetailsViewController {
+//            vc.selectedRecipe = recipesList[indexPath.row]
+//            navigationController?.pushViewController(vc, animated: true)
+            selectedRecipe = recipesList[indexPath.row]
+            performSegue(withIdentifier: "segueToDetails", sender: nil)
+//        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToDetails" {
+            let detailsVC = segue.destination as! DetailsViewController
+            detailsVC.selectedRecipe = selectedRecipe
+        }
     }
 
     // MARK: - Table view data source
@@ -48,7 +66,6 @@ class RecipeViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return recipesList.count
     }
 
@@ -58,28 +75,7 @@ class RecipeViewController: UITableViewController {
         }
         
         let recipe = recipesList[indexPath.row]
-        var image: Data
-        var rank: String
-        var time: String
-        
-        if let backgroundImageUnwrapped = recipe.recipeImage {
-            image = backgroundImageUnwrapped
-        } else {
-            image = (UIImage(named: "Recipe Default Image")?.pngData())!
-        }
-        
-        if let rankUnwrapped = recipe.rank {
-            rank = rankUnwrapped
-        } else {
-            rank = "No rank"
-        }
-        
-        if let timeUnwrapped = recipe.executionTime, timeUnwrapped != "0" {
-            time = timeUnwrapped
-        } else {
-            time = "No time"
-        }
-        cell.configure(title: recipe.recipeTitle, backgroundImage: image, ingredientsList: recipe.ingredientsList, rank: rank, time: time)
+        cell.configure(title: recipe.recipeTitle, backgroundImage: recipe.recipeImage, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
         return cell
     }
     
@@ -103,30 +99,4 @@ class RecipeViewController: UITableViewController {
         }    
     }
     */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
