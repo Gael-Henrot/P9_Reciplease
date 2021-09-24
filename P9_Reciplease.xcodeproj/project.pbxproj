@@ -29,6 +29,13 @@
 		7CBE8FA226F8D7DB0086976C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8FA126F8D7DB0086976C /* DetailsViewController.swift */; };
 		7CBE8FA426F9E1CB0086976C /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8FA326F9E1CB0086976C /* UIViewControllerExtension.swift */; };
 		7CBE8FA626F9F2EE0086976C /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8FA526F9F2EE0086976C /* MockURLProtocol.swift */; };
+		7CF0202826FC688E00BFDED1 /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0202726FC688E00BFDED1 /* FavoritesService.swift */; };
+		7CF0202A26FC7B0C00BFDED1 /* FakeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0202926FC7B0B00BFDED1 /* FakeResponse.swift */; };
+		7CF0202C26FC7C9000BFDED1 /* CorrectRecipesData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CF0202B26FC7C9000BFDED1 /* CorrectRecipesData.json */; };
+		7CF0202E26FC8C5000BFDED1 /* RecipeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0202D26FC8C5000BFDED1 /* RecipeProtocol.swift */; };
+		7CF0203426FCD58300BFDED1 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0203326FCD58300BFDED1 /* MockNetworkService.swift */; };
+		7CF0203626FDBD1300BFDED1 /* MockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0203526FDBD1300BFDED1 /* MockRequest.swift */; };
+		7CF0203826FDFB9400BFDED1 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0203726FDFB9400BFDED1 /* RecipeService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +76,13 @@
 		7CBE8FA126F8D7DB0086976C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		7CBE8FA326F9E1CB0086976C /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		7CBE8FA526F9F2EE0086976C /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		7CF0202726FC688E00BFDED1 /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
+		7CF0202926FC7B0B00BFDED1 /* FakeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponse.swift; sourceTree = "<group>"; };
+		7CF0202B26FC7C9000BFDED1 /* CorrectRecipesData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CorrectRecipesData.json; sourceTree = "<group>"; };
+		7CF0202D26FC8C5000BFDED1 /* RecipeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeProtocol.swift; sourceTree = "<group>"; };
+		7CF0203326FCD58300BFDED1 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		7CF0203526FDBD1300BFDED1 /* MockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequest.swift; sourceTree = "<group>"; };
+		7CF0203726FDFB9400BFDED1 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		7D6531FD7D198D98C620AE4F /* Pods_P9_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P9_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82DEF5198A0D2F0EF269F23F /* Pods-P9_RecipleaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P9_RecipleaseTests.debug.xcconfig"; path = "Target Support Files/Pods-P9_RecipleaseTests/Pods-P9_RecipleaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B330047197BFDA10FCDE9A91 /* Pods-P9_Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P9_Reciplease.release.xcconfig"; path = "Target Support Files/Pods-P9_Reciplease/Pods-P9_Reciplease.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,10 +176,14 @@
 			isa = PBXGroup;
 			children = (
 				7C80A0B526E8C3F8007D4D25 /* NetworkService.swift */,
+				7CF0203326FCD58300BFDED1 /* MockNetworkService.swift */,
 				7CBE8F9026EF70B10086976C /* RecipeList.swift */,
 				7CBE8F9826F226190086976C /* RecipeData.swift */,
 				7CBE8F9A26F359200086976C /* APIKeys.swift */,
 				7CBE8FA526F9F2EE0086976C /* MockURLProtocol.swift */,
+				7CF0202726FC688E00BFDED1 /* FavoritesService.swift */,
+				7CF0202D26FC8C5000BFDED1 /* RecipeProtocol.swift */,
+				7CF0203726FDFB9400BFDED1 /* RecipeService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,8 +202,11 @@
 			isa = PBXGroup;
 			children = (
 				7C80A0BD26E8C745007D4D25 /* P9_RecipleaseTests.swift */,
-				7C80A0BF26E8C745007D4D25 /* Info.plist */,
 				7CBE8F9F26F875AC0086976C /* NetworkServiceTestCases.swift */,
+				7C80A0BF26E8C745007D4D25 /* Info.plist */,
+				7CF0202926FC7B0B00BFDED1 /* FakeResponse.swift */,
+				7CF0202B26FC7C9000BFDED1 /* CorrectRecipesData.json */,
+				7CF0203526FDBD1300BFDED1 /* MockRequest.swift */,
 			);
 			path = P9_RecipleaseTests;
 			sourceTree = "<group>";
@@ -305,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF0202C26FC7C9000BFDED1 /* CorrectRecipesData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,16 +418,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF0202826FC688E00BFDED1 /* FavoritesService.swift in Sources */,
 				7CBE8F9B26F359200086976C /* APIKeys.swift in Sources */,
 				7CBE8F9326EF7A9F0086976C /* RecipeViewController.swift in Sources */,
 				7CBE8F9526EF7ED20086976C /* RecipeTableViewCell.swift in Sources */,
 				7C80A09726E7B3EE007D4D25 /* AppDelegate.swift in Sources */,
+				7CF0203426FCD58300BFDED1 /* MockNetworkService.swift in Sources */,
 				7C80A0B226E7C89D007D4D25 /* IngredientViewController.swift in Sources */,
 				7CBE8F9126EF70B10086976C /* RecipeList.swift in Sources */,
 				7C80A09926E7B3EE007D4D25 /* SceneDelegate.swift in Sources */,
 				7CBE8FA626F9F2EE0086976C /* MockURLProtocol.swift in Sources */,
+				7CF0202E26FC8C5000BFDED1 /* RecipeProtocol.swift in Sources */,
 				7CBE8F9E26F4C1D40086976C /* StringExtension.swift in Sources */,
 				7CBE8F9926F226190086976C /* RecipeData.swift in Sources */,
+				7CF0203826FDFB9400BFDED1 /* RecipeService.swift in Sources */,
 				7CBE8FA426F9E1CB0086976C /* UIViewControllerExtension.swift in Sources */,
 				7C80A0B626E8C3F8007D4D25 /* NetworkService.swift in Sources */,
 				7C80A0A126E7B3EE007D4D25 /* P9_Reciplease.xcdatamodeld in Sources */,
@@ -417,8 +443,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF0202A26FC7B0C00BFDED1 /* FakeResponse.swift in Sources */,
 				7CBE8FA026F875AC0086976C /* NetworkServiceTestCases.swift in Sources */,
 				7C80A0BE26E8C745007D4D25 /* P9_RecipleaseTests.swift in Sources */,
+				7CF0203626FDBD1300BFDED1 /* MockRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

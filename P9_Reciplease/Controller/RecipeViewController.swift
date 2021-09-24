@@ -32,8 +32,6 @@ class RecipeViewController: UITableViewController {
                 self.presentSpecificAlert(error: .requestError)
             case .failure(.noRecipeData):
                 print("No recipe data received")
-            case .failure(.noImageData):
-                print("No image data received")
             case .failure(.noRecipeFound):
                 self.presentSpecificAlert(error: .noRecipeFound)
             }
@@ -75,7 +73,7 @@ class RecipeViewController: UITableViewController {
         }
         
         let recipe = recipesList[indexPath.row]
-        cell.configure(title: recipe.recipeTitle, backgroundImage: recipe.recipeImage, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
+        cell.configure(title: recipe.recipeTitle, backgroundImage: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
         return cell
     }
     

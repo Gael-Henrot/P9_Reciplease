@@ -6,28 +6,37 @@
 //
 
 import XCTest
+import Alamofire
 @testable import P9_Reciplease
 
 class NetworkServiceTestCases: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var networkService = NetworkService()
+    
+    override func setUp() {
+        MockURLProtocol.registerClass(MockURLProtocol.self)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    var expectation: XCTestExpectation!
+    let apiURL = URL(string: "https://api.edamam.com/api/recipes/v2")!
+    let ingredientList = ["Tomato,","Potato,"]
+    
+//    override class func setUp() {
+//        super.setUp()
+//        let configuration = URLSessionConfiguration.af.default
+//        configuration.protocolClasses = [MockURLProtocol.self]
+//        let sessionManager = Session(configuration: configuration)
+//    }
+    
+    func testFetchRecipesSuccess() {
+        MockURLProtocol.fakeResponse = [
+            apiURL:
+                (FakeResponse.recipesCorrectData,
+                 HTTPURLResponse(url: apiURL, statusCode: 200, httpVersion: nil, headerFields: nil),
+                 nil)
+        ]
+        URLProtocol.registerClass(MockURLProtocol.self)
+        networkService.fetchRecipes(with: ingredientList) { result in
         }
     }
-
 }

@@ -13,7 +13,7 @@
         <scene sceneID="21f-de-aFQ">
             <objects>
                 <navigationController id="PxA-u2-m5i" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" selectedImage="magnifyingglass" catalog="system" systemItem="search" id="NW1-Ud-9DJ"/>
+                    <tabBarItem key="tabBarItem" selectedImage="star" catalog="system" systemItem="search" id="NW1-Ud-9DJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="L01-fN-aGJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -361,9 +361,7 @@
                             <constraint firstItem="OGb-Iz-v9K" firstAttribute="trailing" secondItem="MR1-P2-tl9" secondAttribute="trailing" constant="15" id="oWd-SK-yfS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="lQI-EC-GQS">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="star" catalog="system" id="XVR-Ra-HcY"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="lQI-EC-GQS"/>
                     <connections>
                         <outlet property="detailedIngredientsListLabel" destination="d4Y-Un-IfO" id="Iv9-ZD-kBJ"/>
                         <outlet property="rankLabel" destination="VT6-Ij-Bh9" id="5oH-ZW-b8w"/>
@@ -442,7 +440,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">

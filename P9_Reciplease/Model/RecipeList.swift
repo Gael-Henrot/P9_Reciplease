@@ -56,7 +56,7 @@ struct Recipe: Codable {
     let source: String?
     let url: String?
     let ingredientLines: [String]?
-    let ingredients: [Ingredient?]
+    let ingredients: [Ingredient]?
     let totalTime: Int?
 }
 
@@ -66,11 +66,12 @@ struct Ingredient: Codable {
     let text: String?
     let quantity: Double?
     let measure: String?
+    let food: String?
     let weight: Double?
     let image: String?
 
     enum CodingKeys: String, CodingKey {
-        case text, quantity, measure, weight, image
+        case text, quantity, measure, food, weight, image
     }
 }
 
@@ -81,7 +82,7 @@ struct RecipeListLinks: Codable {
 
 // Allows to easily convert the API result into a value or a default value if the value does not exist.
 extension Recipe {
-    var title: String {
+    var recipetitle: String {
         get {
             if let title = label {
                 return title
@@ -91,7 +92,7 @@ extension Recipe {
         }
     }
     
-    var recipeImage: String {
+    var recipeImageURLString: String {
         get {
             if let image = image {
                 return image
@@ -102,7 +103,7 @@ extension Recipe {
     }
     var recipeImageData: Data {
         get {
-            if let recipeImageData = recipeImage.data {
+            if let recipeImageData = recipeImageURLString.data {
                 return recipeImageData
             } else {
                 guard let imageData = UIImage(named: "Recipe Default Image")?.pngData() else {
