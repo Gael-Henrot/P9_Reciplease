@@ -15,7 +15,7 @@ struct RecipeList: Codable {
     
     let from, to, count: Int?
     let links: RecipeListLinks?
-    let recipesList: [RecipeDetails?]
+    let recipesList: [RecipeDetails]?
 
     enum CodingKeys: String, CodingKey {
         case from, to, count
@@ -57,7 +57,7 @@ struct Recipe: Codable {
     let url: String?
     let ingredientLines: [String]?
     let ingredients: [Ingredient]?
-    let totalTime: Int?
+    let totalTime: Double?
 }
 
 
@@ -87,7 +87,7 @@ extension Recipe {
             if let title = label {
                 return title
             } else {
-                return "No title"
+                return "No title."
             }
         }
     }
@@ -103,7 +103,7 @@ extension Recipe {
     }
     var recipeImageData: Data {
         get {
-            if let recipeImageData = recipeImageURLString.data {
+            if let recipeImageData = recipeImageURLString.downloadData {
                 return recipeImageData
             } else {
                 guard let imageData = UIImage(named: "Recipe Default Image")?.pngData() else {

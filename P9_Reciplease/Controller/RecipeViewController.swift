@@ -10,7 +10,7 @@ import ProgressHUD
 
 class RecipeViewController: UITableViewController {
     
-    let networkService = NetworkService()
+    let recipeProvider = RecipeProvider()
     var ingredientsList = [String]()
     var recipesList = [RecipeData]()
     var selectedRecipe: RecipeData?
@@ -18,22 +18,15 @@ class RecipeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ProgressHUD.show("Loading the recipes...")
-        networkService.fetchRecipes(with: ingredientsList) { [weak self] result in
+        recipeProvider.fetchRecipes(with: ingredientsList) { [weak self] result  in
             guard let self = self else { return }
             switch result {
+            case .failure(.noRecipeFound):
+                self.presentSpecificAlert(error: .noRecipeFound)
             case .success(let recipeDataList):
                 self.recipesList = recipeDataList
                 print("Nombre de lignes RecipeVC: \(recipeDataList.count)")
             
-            case .failure(.wrongStatusCode):
-                print("Wrong status error")
-            case .failure(.requestError):
-                self.dismiss(animated: true, completion: nil)
-                self.presentSpecificAlert(error: .requestError)
-            case .failure(.noRecipeData):
-                print("No recipe data received")
-            case .failure(.noRecipeFound):
-                self.presentSpecificAlert(error: .noRecipeFound)
             }
             self.tableView.reloadData()
             ProgressHUD.dismiss()

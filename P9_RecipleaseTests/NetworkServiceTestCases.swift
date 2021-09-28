@@ -11,32 +11,87 @@ import Alamofire
 
 class NetworkServiceTestCases: XCTestCase {
     
-    var networkService = NetworkService()
-    
     override func setUp() {
-        MockURLProtocol.registerClass(MockURLProtocol.self)
+//        MockURLProtocol.registerClass(MockURLProtocol.self)
+    }
+    func testFetchRecipesSuccessCase() {
+        let expectation = self.expectation(description: "Success")
+        let client = MockClient(fakeResponses: .success)
+        let recipeService = RecipeProvider(client: client)
+        
+        recipeService.fetchRecipes(with: [""]) { result in
+            XCTAssertNotNil(try? result.get())
+            XCTAssertEqual(FakeResponses.correctRecipeDataArray, try! result.get())
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
     
-    var expectation: XCTestExpectation!
-    let apiURL = URL(string: "https://api.edamam.com/api/recipes/v2")!
-    let ingredientList = ["Tomato,","Potato,"]
-    
-//    override class func setUp() {
-//        super.setUp()
-//        let configuration = URLSessionConfiguration.af.default
-//        configuration.protocolClasses = [MockURLProtocol.self]
-//        let sessionManager = Session(configuration: configuration)
-//    }
-    
-    func testFetchRecipesSuccess() {
-        MockURLProtocol.fakeResponse = [
-            apiURL:
-                (FakeResponse.recipesCorrectData,
-                 HTTPURLResponse(url: apiURL, statusCode: 200, httpVersion: nil, headerFields: nil),
-                 nil)
-        ]
-        URLProtocol.registerClass(MockURLProtocol.self)
-        networkService.fetchRecipes(with: ingredientList) { result in
+    func testFetchRecipesWrongStatusFailureCase() {
+        let expectation = self.expectation(description: "Failure")
+        let client = MockClient(fakeResponses: .failureWithWrongStatusCode)
+        let recipeService = RecipeProvider(client: client)
+
+        recipeService.fetchRecipes(with: [""]) { result in
+            XCTAssertEqual(result, .failure(.noRecipeFound))
+            expectation.fulfill()
         }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    func testFetchRecipesRequestErrorFailureCase() {
+        let expectation = self.expectation(description: "Failure")
+        let client = MockClient(fakeResponses: .failureWithRequestError)
+        let recipeService = RecipeProvider(client: client)
+
+        recipeService.fetchRecipes(with: [""]) { result in
+            XCTAssertEqual(result, .failure(.noRecipeFound))
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    func testFetchRecipesNoDataFailureCase() {
+        let expectation = self.expectation(description: "Failure")
+        let client = MockClient(fakeResponses: .failureWithoutData)
+        let recipeService = RecipeProvider(client: client)
+
+        recipeService.fetchRecipes(with: [""]) { result in
+            XCTAssertEqual(result, .failure(.noRecipeFound))
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    func testFetchRecipesDecodingFailureCase() {
+        let expectation = self.expectation(description: "Failure")
+        let client = MockClient(fakeResponses: .failureWithDecodingIssue)
+        let recipeService = RecipeProvider(client: client)
+
+        recipeService.fetchRecipes(with: [""]) { result in
+            XCTAssertEqual(result, .failure(.noRecipeFound))
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    func testFetchRecipesNoRecipeListFailureCase() {
+        let expectation = self.expectation(description: "Failure")
+        let client = MockClient(fakeResponses: .successWithEmptyRecipeList)
+        let recipeService = RecipeProvider(client: client)
+
+        recipeService.fetchRecipes(with: [""]) { result in
+            XCTAssertEqual(result, .failure(.noRecipeFound))
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    
+    func testFetchRecipesNoRecipeinRecipeListFailureCase() {
+        let expectation = self.expectation(description: "Failure")
+        let client = MockClient(fakeResponses: .successWithEmptyRecipeInRecipeList)
+        let recipeService = RecipeProvider(client: client)
+
+        recipeService.fetchRecipes(with: [""]) { result in
+            XCTAssertEqual(result, .failure(.noRecipeFound))
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 }
