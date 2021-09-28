@@ -35,12 +35,8 @@ class RecipeViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Details") as? DetailsViewController {
-//            vc.selectedRecipe = recipesList[indexPath.row]
-//            navigationController?.pushViewController(vc, animated: true)
             selectedRecipe = recipesList[indexPath.row]
             performSegue(withIdentifier: "segueToDetails", sender: nil)
-//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,7 +62,7 @@ class RecipeViewController: UITableViewController {
         }
         
         let recipe = recipesList[indexPath.row]
-        cell.configure(title: recipe.recipeTitle, backgroundImage: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
+        cell.configure(title: recipe.title, backgroundImage: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
         return cell
     }
     

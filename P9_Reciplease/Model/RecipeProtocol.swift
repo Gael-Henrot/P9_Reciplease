@@ -8,8 +8,8 @@
 import Foundation
 
 protocol RecipeProtocol {
-    var recipeTitle: String { get }
-    var recipeImage: Data { get }
+    var title: String { get }
+    var imageURL: String { get }
     var ingredientsList: [String] { get }
     var detailedIngredientsList: [String] { get }
     var executionTime: String { get }

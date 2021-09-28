@@ -32,16 +32,9 @@ struct FakeResponses {
             "2 pounds salad tomatoes (about 5 medium), chopped"
         ], ingredients: [Ingredient(text: "2 pounds Yukon Gold potatoes (about 6), peeled and cut into 2-inch pieces", quantity: 2.0, measure: "pound", food: "Yukon Gold potatoes", weight: 907.18474, image: "https://www.edamam.com/food-img/651/6512e82417bce15c2899630c1a2799df.jpg"),Ingredient(text: "2 garlic cloves, peeled", quantity: 2.0, measure: "clove", food: "garlic", weight: 6.0, image: "https://www.edamam.com/food-img/6ee/6ee142951f48aaf94f4312409f8d133d.jpg")], totalTime: 40.0), links: RecipeLinks(linksSelf: Next(href: "")))])
 
-    static let correctRecipeDataArray = [RecipeData(recipeTitle: "Tuna With Peppery Tomatoes & Potatoes", recipeImageURLString: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg", recipeImageData: try! Data(contentsOf: URL(string: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg")!), ingredientsList: [
-        "2 red peppers , cut into large chunks",
-        "1 red onion , cut into eighths",
-        "few thyme sprigs",
-        "400.0g can cherry tomatoes",
-        "1 green chilli , deseeded and chopped",
-        "4 tuna steaks",
-        "1.0 tbsp olive oil",
-        "500.0g bag new potatoes , sliced about 1cm thick",
-        "3 garlic cloves , crushed"], detailedIngredientsList: [
+    static let correctRecipeDataArray = [RecipeData(title: "Tuna With Peppery Tomatoes & Potatoes", imageURL: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg", recipeImageData: try! Data(contentsOf: URL(string: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg")!), ingredientsList: [
+        "red peppers",
+        "red onion"], detailedIngredientsList: [
             "2 red peppers , cut into large chunks",
             "1 red onion , cut into eighths",
             "few thyme sprigs",
@@ -50,17 +43,9 @@ struct FakeResponses {
             "4 tuna steaks",
             "1.0 tbsp olive oil",
             "500.0g bag new potatoes , sliced about 1cm thick",
-            "3 garlic cloves , crushed"], executionTime: "No time.", rank: "No rank.", originSourceURL: "http://www.bbcgoodfood.com/recipes/5876/"), RecipeData(recipeTitle: "Mashed Tomato Potatoes", recipeImageURLString: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg", recipeImageData: try! Data(contentsOf: URL(string: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg")!), ingredientsList: [
-                "2 pounds Yukon Gold potatoes (about 6), peeled and cut into 2-inch pieces",
-                "2 garlic cloves, peeled",
-                "1/2 cup milk",
-                "1/4 cup (1/2 stick) unsalted butter",
-                "1/4 cup chopped flat-leaf parsley",
-                "3 scallions, trimmed and chopped",
-                "1/2 cup grated Parmesan",
-                "1/2 teaspoon kosher salt",
-                "2 pounds salad tomatoes (about 5 medium), chopped"
-            ], detailedIngredientsList: [
+            "3 garlic cloves , crushed"], executionTime: "No time.", rank: "No rank.", originSourceURL: "http://www.bbcgoodfood.com/recipes/5876/"), RecipeData(title: "Mashed Tomato Potatoes", imageURL: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg", recipeImageData: try! Data(contentsOf: URL(string: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg")!), ingredientsList: [
+                "Yukon Gold potatoes",
+                "garlic"], detailedIngredientsList: [
                 "2 pounds Yukon Gold potatoes (about 6), peeled and cut into 2-inch pieces",
                 "2 garlic cloves, peeled",
                 "1/2 cup milk",
@@ -71,24 +56,4 @@ struct FakeResponses {
                 "1/2 teaspoon kosher salt",
                 "2 pounds salad tomatoes (about 5 medium), chopped"
             ], executionTime: "40.0 min.", rank: "No rank.", originSourceURL: "https://www.realsimple.com/food-recipes/browse-all-recipes/mashed-tomato-potatoes")]
-
-    
-}
-
-class FakeResponseData {
-    
-    static let responseOK = HTTPURLResponse(url: URL(string: "https://www.apple.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-    static let responseKO = HTTPURLResponse(url: URL(string: "https://www.apple.com")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
-    
-    class NetworkError: Error {}
-    static let networkError = NetworkError()
-    
-    static var correctRecipesData: Data {
-        let bundle = Bundle(for: FakeResponseData.self)
-        let url = bundle.url(forResource: "CorrectRecipesData", withExtension: "json")
-        let data = try! Data(contentsOf: url!)
-        return data
-    }
-    
-    static let incorrectRecipesData: Data = "erreur".data(using: .utf8)!
 }

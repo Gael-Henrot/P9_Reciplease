@@ -81,8 +81,8 @@ struct RecipeListLinks: Codable {
 }
 
 // Allows to easily convert the API result into a value or a default value if the value does not exist.
-extension Recipe {
-    var recipetitle: String {
+extension Recipe: RecipeProtocol {
+    var title: String {
         get {
             if let title = label {
                 return title
@@ -92,7 +92,7 @@ extension Recipe {
         }
     }
     
-    var recipeImageURLString: String {
+    var imageURL: String {
         get {
             if let image = image {
                 return image
@@ -103,7 +103,7 @@ extension Recipe {
     }
     var recipeImageData: Data {
         get {
-            if let recipeImageData = recipeImageURLString.downloadData {
+            if let recipeImageData = imageURL.downloadData {
                 return recipeImageData
             } else {
                 guard let imageData = UIImage(named: "Recipe Default Image")?.pngData() else {

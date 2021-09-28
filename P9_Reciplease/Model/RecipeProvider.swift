@@ -29,14 +29,12 @@ class RecipeProvider {
     }
     
     //MARK: - Methods
-    func fetchRecipe(with ingredientsList: [String], completionHandler: @escaping (Result<[RecipeData], RecipeError>) -> Void) {
+    /// Asks for a list of recipe from the API Edanam and provides an array of RecipeData.
+    func fetchRecipes(with ingredientsList: [String], completionHandler: @escaping (Result<[RecipeData], RecipeError>) -> Void) {
         
         var recipesList: [RecipeData] = []
         
-        guard let url = URL(string: "https://api.edamam.com/api/recipes/v2") else {
-            print("Edanam API url not recognized.")
-            return
-        }
+        let url: String = "https://api.edamam.com/api/recipes/v2"
         
         var q: String = ""
         for eachIngredient in ingredientsList {
@@ -69,52 +67,19 @@ class RecipeProvider {
                     guard let recipe = eachRecipe.recipe else {
                         return completionHandler(.failure(.noRecipeFound))
                     }
-                    
-                    let recipeData = RecipeData(recipeTitle: recipe.recipetitle, recipeImageURLString: recipe.recipeImageURLString, recipeImageData: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
+                    var genericIngredientsList = [String]()
+                    guard let ingredients = recipe.ingredients else { return }
+                    for eachIngredient in ingredients {
+                        guard let description = eachIngredient.food else { return }
+                        genericIngredientsList.append(description)
+                    }
+                    let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, recipeImageData: recipe.recipeImageData, ingredientsList: genericIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
                     recipesList.append(recipeData)
                 }
                 print("Recipes found: \(recipesList.count)")
                 completionHandler(.success(recipesList))
             }
         })
-        
-    }
-    /// Asks for a list of recipe from the API Edanam and provides an array of RecipeData.
-    func fetchRecipes(with ingredientsList: [String], completionHandler: @escaping (Result<[RecipeData], RecipeError>) -> Void) {
-        
-        var recipesList: [RecipeData] = []
-        
-        client.fetchRecipeData(with: ingredientsList) { [weak self] response in
-            guard self != nil else { return }
-            switch response {
-            case .failure(.requestError):
-                print("Request error")
-                return completionHandler(.failure(.noRecipeFound))
-            case .failure(.noData):
-                print("No data provided")
-                return completionHandler(.failure(.noRecipeFound))
-            case .failure(.wrongStatusCode):
-                print("Wrong status code")
-                return completionHandler(.failure(.noRecipeFound))
-            case .failure(.decodingIssue):
-                print("Trouble with decodable")
-                return completionHandler(.failure(.noRecipeFound))
-            case .success(let recipeList):
-                guard let list = recipeList.recipesList, list.isEmpty == false else {
-                    return completionHandler(.failure(.noRecipeFound))
-                }
-                for eachRecipe in list {
-                    guard let recipe = eachRecipe.recipe else {
-                        return completionHandler(.failure(.noRecipeFound))
-                    }
-                    
-                    let recipeData = RecipeData(recipeTitle: recipe.recipetitle, recipeImageURLString: recipe.recipeImageURLString, recipeImageData: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
-                    recipesList.append(recipeData)
-                }
-                print("Nombre de recettes trouvées: \(recipesList.count)")
-                completionHandler(.success(recipesList))
-            }
-        }
     }
 }
 
