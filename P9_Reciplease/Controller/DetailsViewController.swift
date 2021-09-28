@@ -23,8 +23,7 @@ class DetailsViewController: UIViewController {
             return
         }
         configureDetailsView(with: selectedRecipeUnwrapped)
-        
-//         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(tappedFavoriteButton))
     }
    
     
@@ -41,8 +40,8 @@ class DetailsViewController: UIViewController {
     
     private func configureDetailsView(with recipe: RecipeData) {
         var ingredientsListToDisplay: String = ""
-        recipeImage.image = UIImage(data:recipe.recipeImage)
-        recipeTitleLabel.text = recipe.recipeTitle
+        recipeImage.image = UIImage(data:recipe.recipeImageData)
+        recipeTitleLabel.text = recipe.title
         rankLabel.text = recipe.rank
         timeLabel.text = recipe.executionTime
         
@@ -50,5 +49,9 @@ class DetailsViewController: UIViewController {
             ingredientsListToDisplay.append("- \(ingredient)\n")
         }
         detailedIngredientsListLabel.text = ingredientsListToDisplay
+    }
+    
+    @objc private func tappedFavoriteButton() {
+        print("Appui sur bouton favori")
     }
 }

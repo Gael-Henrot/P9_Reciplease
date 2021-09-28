@@ -10,7 +10,7 @@ import ProgressHUD
 
 class RecipeViewController: UITableViewController {
     
-    let networkService = NetworkService()
+    let recipeProvider = RecipeProvider()
     var ingredientsList = [String]()
     var recipesList = [RecipeData]()
     var selectedRecipe: RecipeData?
@@ -18,24 +18,15 @@ class RecipeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ProgressHUD.show("Loading the recipes...")
-        networkService.fetchRecipes(with: ingredientsList) { [weak self] result in
+        recipeProvider.fetchRecipes(with: ingredientsList) { [weak self] result  in
             guard let self = self else { return }
             switch result {
+            case .failure(.noRecipeFound):
+                self.presentSpecificAlert(error: .noRecipeFound)
             case .success(let recipeDataList):
                 self.recipesList = recipeDataList
                 print("Nombre de lignes RecipeVC: \(recipeDataList.count)")
             
-            case .failure(.wrongStatusCode):
-                print("Wrong status error")
-            case .failure(.requestError):
-                self.dismiss(animated: true, completion: nil)
-                self.presentSpecificAlert(error: .requestError)
-            case .failure(.noRecipeData):
-                print("No recipe data received")
-            case .failure(.noImageData):
-                print("No image data received")
-            case .failure(.noRecipeFound):
-                self.presentSpecificAlert(error: .noRecipeFound)
             }
             self.tableView.reloadData()
             ProgressHUD.dismiss()
@@ -44,12 +35,8 @@ class RecipeViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Details") as? DetailsViewController {
-//            vc.selectedRecipe = recipesList[indexPath.row]
-//            navigationController?.pushViewController(vc, animated: true)
             selectedRecipe = recipesList[indexPath.row]
             performSegue(withIdentifier: "segueToDetails", sender: nil)
-//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -75,7 +62,7 @@ class RecipeViewController: UITableViewController {
         }
         
         let recipe = recipesList[indexPath.row]
-        cell.configure(title: recipe.recipeTitle, backgroundImage: recipe.recipeImage, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
+        cell.configure(title: recipe.title, backgroundImage: recipe.recipeImageData, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
         return cell
     }
     
