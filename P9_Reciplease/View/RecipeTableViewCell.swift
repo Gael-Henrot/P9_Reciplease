@@ -7,7 +7,7 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
+import SDWebImage
 
 class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeImage: UIImageView!
@@ -21,8 +21,8 @@ class RecipeTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(title: String, backgroundImage: UIImage, ingredientsList: [String], rank: String, time: String) {
-        recipeImage.image = backgroundImage
+    func configure(title: String, backgroundImage: String, ingredientsList: [String], rank: String, time: String) {
+        recipeImage.sd_setImage(with: URL(string: backgroundImage), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
         recipeTitleLabel.text = title
         rankLabel.text = rank
         timeLabel.text = time

@@ -29,13 +29,13 @@ struct MockClient: NetworkClientType {
 
 extension MockClient.FakeResponses {
     static var success: MockClient.FakeResponses {
-        return .init(fakeResponse: .success(FakeResponses.correctRecipeList))
+        return .init(fakeResponse: .success(FakeRecipeProviderResponses.correctRecipeList))
     }
     static var successWithEmptyRecipeList: MockClient.FakeResponses {
-        return .init(fakeResponse: .success(FakeResponses.emptyRecipeList))
+        return .init(fakeResponse: .success(FakeRecipeProviderResponses.emptyRecipeList))
     }
     static var successWithEmptyRecipeInRecipeList: MockClient.FakeResponses {
-        return .init(fakeResponse: .success(FakeResponses.emptyRecipeInRecipeList))
+        return .init(fakeResponse: .success(FakeRecipeProviderResponses.emptyRecipeInRecipeList))
     }
     static var failureWithRequestError: MockClient.FakeResponses {
         return .init(fakeResponse: .failure(.requestError))

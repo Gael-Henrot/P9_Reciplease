@@ -14,15 +14,16 @@ class RecipeProvider {
     /// Allows to decode the edanamAPIKey from the APIKeys.json file.
     private var edanamAPIKey: String {
         let bundle = Bundle(for: RecipeProvider.self)
-        let url = bundle.url(forResource: "APIKeys", withExtension: "json")
-        let data = try? Data(contentsOf: url!)
-        guard let APIKeys = try? JSONDecoder().decode(APIKeys.self, from: data!) else {
+        guard let url = bundle.url(forResource: "APIKeys", withExtension: "json") else {
             print("No API key found. Please verify or create your APIKeys.json file.")
+            return "No-API-key-found"
+        }
+        let data = try? Data(contentsOf: url)
+        guard let APIKeys = try? JSONDecoder().decode(APIKeys.self, from: data!) else {
             return "No-API-key-found"
         }
         return APIKeys.edanamAPIKey
     }
-    
     //MARK: - Initializer
     init(client: NetworkClientType = NetworkClient()) {
         self.client = client

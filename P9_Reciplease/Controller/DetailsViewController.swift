@@ -40,7 +40,7 @@ class DetailsViewController: UIViewController {
     
     private func configureDetailsView(with recipe: RecipeData) {
         var ingredientsListToDisplay: String = ""
-//        recipeImage.image = UIImage(data:recipe.recipeImageData)
+        recipeImage.sd_setImage(with: URL(string: recipe.imageURL), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
         recipeTitleLabel.text = recipe.title
         rankLabel.text = recipe.rank
         timeLabel.text = recipe.executionTime

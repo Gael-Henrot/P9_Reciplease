@@ -21,7 +21,7 @@ class NetworkServiceTestCases: XCTestCase {
         
         recipeService.fetchRecipes(with: [""]) { result in
             XCTAssertNotNil(try? result.get())
-            XCTAssertEqual(FakeResponses.correctRecipeDataArray, try! result.get())
+            XCTAssertEqual(FakeRecipeProviderResponses.correctRecipeDataArray, try! result.get())
             expectation.fulfill()
         }
         waitForExpectations(timeout: 1.0, handler: nil)

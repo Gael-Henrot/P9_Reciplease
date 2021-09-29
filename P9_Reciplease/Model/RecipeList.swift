@@ -101,26 +101,9 @@ extension Recipe: RecipeProtocol {
             }
         }
     }
-//    var recipeImageData: Data {
-//        get {
-//            if let recipeImageData = imageURL.downloadData {
-//                return recipeImageData
-//            } else {
-//                guard let imageData = UIImage(named: "Recipe Default Image")?.pngData() else {
-//                    print("Default image not found.")
-//                    return Data()
-//                }
-//                return imageData
-//            }
-//        }
-//    }
     var ingredientsList: [String] {
         get {
-            if let ingredientsList = ingredientLines {
-                return ingredientsList
-            } else {
-            return ["No ingredient provided."]
-            }
+            return [""]
         }
     }
     var detailedIngredientsList: [String] {

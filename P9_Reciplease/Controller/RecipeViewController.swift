@@ -7,7 +7,6 @@
 
 import UIKit
 import ProgressHUD
-import Alamofire
 
 class RecipeViewController: UITableViewController {
     
@@ -63,18 +62,8 @@ class RecipeViewController: UITableViewController {
         }
         
         let recipe = recipesList[indexPath.row]
-        AF.request(recipe.imageURL)
-            .responseImage { [weak self] response in
-                guard self != nil else { return }
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success(let image):
-                        cell.configure(title: recipe.title, backgroundImage: image, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
-                    case.failure(_):
-                        print("Image download error")
-                    }
-                }
-            }
+        
+        cell.configure(title: recipe.title, backgroundImage: recipe.imageURL, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
         return cell
     }
     

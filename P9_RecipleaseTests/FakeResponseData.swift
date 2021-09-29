@@ -8,7 +8,7 @@
 import Foundation
 @testable import P9_Reciplease
 
-struct FakeResponses {
+struct FakeRecipeProviderResponses {
     static let emptyRecipeList = RecipeList(from: nil, to: nil, count: nil, links: nil, recipesList: nil)
     static let emptyRecipeInRecipeList = RecipeList(from: nil, to: nil, count: nil, links: nil, recipesList: [RecipeDetails(recipe: nil, links: nil)])
     static let correctRecipeList = RecipeList(from: 1, to: 2, count: 2, links: RecipeListLinks(next: Next(href: "http://www.edamam.com/ontologies/edamam.owl#recipe_4668efe4dec0421db931bea615638039")), recipesList: [RecipeDetails(recipe: Recipe(label: "Tuna With Peppery Tomatoes & Potatoes", image: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg", source: "BBC Good Food", url: "http://www.bbcgoodfood.com/recipes/5876/", ingredientLines: [
@@ -32,7 +32,7 @@ struct FakeResponses {
             "2 pounds salad tomatoes (about 5 medium), chopped"
         ], ingredients: [Ingredient(text: "2 pounds Yukon Gold potatoes (about 6), peeled and cut into 2-inch pieces", quantity: 2.0, measure: "pound", food: "Yukon Gold potatoes", weight: 907.18474, image: "https://www.edamam.com/food-img/651/6512e82417bce15c2899630c1a2799df.jpg"),Ingredient(text: "2 garlic cloves, peeled", quantity: 2.0, measure: "clove", food: "garlic", weight: 6.0, image: "https://www.edamam.com/food-img/6ee/6ee142951f48aaf94f4312409f8d133d.jpg")], totalTime: 40.0), links: RecipeLinks(linksSelf: Next(href: "")))])
 
-    static let correctRecipeDataArray = [RecipeData(title: "Tuna With Peppery Tomatoes & Potatoes", imageURL: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg", recipeImageData: try! Data(contentsOf: URL(string: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg")!), ingredientsList: [
+    static let correctRecipeDataArray = [RecipeData(title: "Tuna With Peppery Tomatoes & Potatoes", imageURL: "https://www.edamam.com/web-img/e89/e89259a951e7ed764afdcc69265543a8.jpg", ingredientsList: [
         "red peppers",
         "red onion"], detailedIngredientsList: [
             "2 red peppers , cut into large chunks",
@@ -43,7 +43,7 @@ struct FakeResponses {
             "4 tuna steaks",
             "1.0 tbsp olive oil",
             "500.0g bag new potatoes , sliced about 1cm thick",
-            "3 garlic cloves , crushed"], executionTime: "No time.", rank: "No rank.", originSourceURL: "http://www.bbcgoodfood.com/recipes/5876/"), RecipeData(title: "Mashed Tomato Potatoes", imageURL: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg", recipeImageData: try! Data(contentsOf: URL(string: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg")!), ingredientsList: [
+            "3 garlic cloves , crushed"], executionTime: "No time.", rank: "No rank.", originSourceURL: "http://www.bbcgoodfood.com/recipes/5876/"), RecipeData(title: "Mashed Tomato Potatoes", imageURL: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg", ingredientsList: [
                 "Yukon Gold potatoes",
                 "garlic"], detailedIngredientsList: [
                 "2 pounds Yukon Gold potatoes (about 6), peeled and cut into 2-inch pieces",
