@@ -21,8 +21,8 @@ class RecipeTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(title: String, backgroundImage: Data, ingredientsList: [String], rank: String, time: String) {
-        recipeImage.image = UIImage(data: backgroundImage)
+    func configure(title: String, backgroundImage: UIImage, ingredientsList: [String], rank: String, time: String) {
+        recipeImage.image = backgroundImage
         recipeTitleLabel.text = title
         rankLabel.text = rank
         timeLabel.text = time

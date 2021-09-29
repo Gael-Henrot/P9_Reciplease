@@ -73,7 +73,7 @@ class RecipeProvider {
                         guard let description = eachIngredient.food else { return }
                         genericIngredientsList.append(description)
                     }
-                    let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, recipeImageData: recipe.recipeImageData, ingredientsList: genericIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
+                    let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, ingredientsList: genericIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
                     recipesList.append(recipeData)
                 }
                 print("Recipes found: \(recipesList.count)")
