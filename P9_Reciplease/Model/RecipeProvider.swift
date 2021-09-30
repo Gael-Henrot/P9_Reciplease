@@ -27,7 +27,7 @@ class RecipeProvider {
     }
     
     private var nextPageURL: String = ""
-    static var isLoadingRecipes: Bool = false
+    var isLoadingRecipes: Bool = false
     
     //MARK: - Initializer
     init(client: NetworkClientType = NetworkClient()) {
@@ -39,7 +39,7 @@ class RecipeProvider {
     func fetchRecipes(firstcall: Bool = true, with ingredientsList: [String]? = nil, loading: Bool = false, completionHandler: @escaping (Result<[RecipeData], RecipeError>) -> Void) {
  
         if loading {
-            RecipeProvider.isLoadingRecipes = true
+            self.isLoadingRecipes = true
         }
         
         var recipesList: [RecipeData] = []
@@ -77,23 +77,28 @@ class RecipeProvider {
             switch response {
             case .failure(NetworkError.requestError):
                 print("Request error")
+                self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .failure(.noData):
                 print("No data provided")
+                self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .failure(.wrongStatusCode):
                 print("Wrong status code")
+                self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .failure(.decodingIssue):
                 print("Trouble with decodable")
+                self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .success(let recipeList):
                 guard let list = recipeList.recipesList, list.isEmpty == false else {
+                    self?.isLoadingRecipes = false
                     return completionHandler(.failure(.noRecipeFound))
                 }
                 for eachRecipe in list {
                     guard let recipe = eachRecipe.recipe else {
-                        RecipeProvider.isLoadingRecipes = false
+                        self?.isLoadingRecipes = false
                         return completionHandler(.failure(.noRecipeFound))
                     }
                     var genericIngredientsList = [String]()
@@ -102,18 +107,15 @@ class RecipeProvider {
                         guard let description = eachIngredient.food else { return }
                         genericIngredientsList.append(description)
                     }
+                    // Creation of the unit recipe object (one by recipe)
                     let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, ingredientsList: genericIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
                     guard let nextPageURL = recipeList.links?.next?.href else { return }
                     self?.nextPageURL = nextPageURL
                     recipesList.append(recipeData)
                 }
-                print("Recipes found: \(recipesList.count)")
-                print("isLoading at end 1: \(String(describing: RecipeProvider.isLoadingRecipes.description))")
                 completionHandler(.success(recipesList))
                 if loading {
-//                    guard let self = self else { return }
-                    RecipeProvider.isLoadingRecipes = false
-                    print("isLoading at end 2: \(String(describing: RecipeProvider.isLoadingRecipes.description))")
+                    self?.isLoadingRecipes = false
                 }
             }
             

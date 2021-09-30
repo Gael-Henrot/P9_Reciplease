@@ -72,21 +72,19 @@ class RecipeViewController: UITableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-        if offsetY > contentHeight - scrollView.frame.height {
-//            print("je suis en bas de la tableView")
-//        }
-//        let position = scrollView.contentOffset.y
-//        let scrollViewPosition = tableView.contentSize.height-100-scrollView.frame.size.height
-//        if position > scrollViewPosition {
+        if offsetY > contentHeight - scrollView.frame.height + 100 {
             
-            guard RecipeProvider.isLoadingRecipes == false else {
+            guard recipeProvider.isLoadingRecipes == false else {
                 return
             }
+            self.tableView.tableFooterView = createActivityIndicatorInFooter()
+            
             recipeProvider.fetchRecipes(firstcall: false, loading: true) { [weak self] result in
                 guard let self = self else { return }
+                self.tableView.tableFooterView = nil
                 switch result {
                 case .failure(.noRecipeFound):
-                    RecipeProvider.isLoadingRecipes = false
+                    self.recipeProvider.isLoadingRecipes = false
                     print("No recipe provided")
                     self.presentSpecificAlert(error: .noRecipeFound)
                 case .success(let recipeDataList):
@@ -99,23 +97,13 @@ class RecipeViewController: UITableViewController {
             print("Recipe in recipesListVC: \(recipesList.count)")
         }
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    private func createActivityIndicatorInFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.center = footerView.center
+        footerView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        return footerView
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
 }

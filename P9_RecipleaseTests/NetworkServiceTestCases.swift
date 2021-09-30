@@ -27,6 +27,19 @@ class NetworkServiceTestCases: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
     
+    func testSecondFetchRecipesSuccessCase() {
+        let expectation = self.expectation(description: "Success")
+        let client = MockClient(fakeResponses: .success)
+        let recipeService = RecipeProvider(client: client)
+        
+        recipeService.fetchRecipes(firstcall: false, loading: true) { result in
+            XCTAssertNotNil(try? result.get())
+            XCTAssertEqual(FakeRecipeProviderResponses.correctRecipeDataArray, try! result.get())
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    
     func testFetchRecipesWrongStatusFailureCase() {
         let expectation = self.expectation(description: "Failure")
         let client = MockClient(fakeResponses: .failureWithWrongStatusCode)
