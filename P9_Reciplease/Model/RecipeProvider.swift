@@ -15,15 +15,20 @@ class RecipeProvider {
     private var edanamAPIKey: String {
         let bundle = Bundle(for: RecipeProvider.self)
         guard let url = bundle.url(forResource: "APIKeys", withExtension: "json") else {
-            print("No API key found. Please verify or create your APIKeys.json file.")
+            print("No API key found. Please create your APIKeys.json file.")
             return "No-API-key-found"
         }
         let data = try? Data(contentsOf: url)
         guard let APIKeys = try? JSONDecoder().decode(APIKeys.self, from: data!) else {
+            print("No API key found. Please verify your APIKeys.json file content.")
             return "No-API-key-found"
         }
         return APIKeys.edanamAPIKey
     }
+    
+    private var nextPageURL: String = ""
+    static var isLoadingRecipes: Bool = false
+    
     //MARK: - Initializer
     init(client: NetworkClientType = NetworkClient()) {
         self.client = client
@@ -31,19 +36,41 @@ class RecipeProvider {
     
     //MARK: - Methods
     /// Asks for a list of recipe from the API Edanam and provides an array of RecipeData.
-    func fetchRecipes(with ingredientsList: [String], completionHandler: @escaping (Result<[RecipeData], RecipeError>) -> Void) {
+    func fetchRecipes(firstcall: Bool = true, with ingredientsList: [String]? = nil, loading: Bool = false, completionHandler: @escaping (Result<[RecipeData], RecipeError>) -> Void) {
+ 
+        if loading {
+            RecipeProvider.isLoadingRecipes = true
+        }
         
         var recipesList: [RecipeData] = []
         
-        let url: String = "https://api.edamam.com/api/recipes/v2"
+        var url: String {
+            get {
+                if firstcall {
+                    return "https://api.edamam.com/api/recipes/v2"
+                } else {
+                    return nextPageURL
+                }
+            }
+        }
         
         var q: String = ""
-        for eachIngredient in ingredientsList {
-            q.append("\(eachIngredient),")
+        if let ingredientsList = ingredientsList {
+            for eachIngredient in ingredientsList {
+                q.append("\(eachIngredient),")
+            }
+        }
+        
+        var parameters: [String: String]? {
+            get {
+                if firstcall {
+                    return ["type": "public", "q": q, "app_id": "8e985d0c", "app_key": self.edanamAPIKey]
+                } else {
+                    return nil
+                }
+            }
         }
         print("Parameters: " + q)
-        
-        let parameters: [String: String] = ["type": "public", "q": q, "app_id": "8e985d0c", "app_key": self.edanamAPIKey]
         
         client.makeRequest(for: url, withMethod: .get, parameters: parameters, callback: { [weak self] (response: Result<RecipeList, NetworkError>) in
             guard self != nil else { return }
@@ -66,6 +93,7 @@ class RecipeProvider {
                 }
                 for eachRecipe in list {
                     guard let recipe = eachRecipe.recipe else {
+                        RecipeProvider.isLoadingRecipes = false
                         return completionHandler(.failure(.noRecipeFound))
                     }
                     var genericIngredientsList = [String]()
@@ -75,11 +103,20 @@ class RecipeProvider {
                         genericIngredientsList.append(description)
                     }
                     let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, ingredientsList: genericIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
+                    guard let nextPageURL = recipeList.links?.next?.href else { return }
+                    self?.nextPageURL = nextPageURL
                     recipesList.append(recipeData)
                 }
                 print("Recipes found: \(recipesList.count)")
+                print("isLoading at end 1: \(String(describing: RecipeProvider.isLoadingRecipes.description))")
                 completionHandler(.success(recipesList))
+                if loading {
+//                    guard let self = self else { return }
+                    RecipeProvider.isLoadingRecipes = false
+                    print("isLoading at end 2: \(String(describing: RecipeProvider.isLoadingRecipes.description))")
+                }
             }
+            
         })
     }
 }

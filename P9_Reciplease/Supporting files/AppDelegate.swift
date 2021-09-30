@@ -16,18 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//
-//
-//
-//
-//        MyProtocol.fakeResponse[URL(string:"http://www.google.com"), (Data(),
-//                                                                      HTTPURLResponse(url: URL(string:"http://www.google.com"), statusCode: 200, httpVersion: nil, headerFields: nil),
-//                                                                      nil)]
-//
-//
-//        AF.request("http://www.google.com").responseData { response in
-//            <#code#>
-//        }
         return true
     }
 

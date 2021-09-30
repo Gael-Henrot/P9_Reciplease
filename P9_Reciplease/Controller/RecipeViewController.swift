@@ -18,14 +18,14 @@ class RecipeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ProgressHUD.show("Loading the recipes...")
-        recipeProvider.fetchRecipes(with: ingredientsList) { [weak self] result  in
+        recipeProvider.fetchRecipes(with: ingredientsList) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .failure(.noRecipeFound):
                 self.presentSpecificAlert(error: .noRecipeFound)
             case .success(let recipeDataList):
-                self.recipesList = recipeDataList
-                print("Nombre de lignes RecipeVC: \(recipeDataList.count)")
+                self.recipesList.append(contentsOf: recipeDataList)
+                print("Recipes found RecipeVC: \(recipeDataList.count)")
             
             }
             self.tableView.reloadData()
@@ -53,6 +53,7 @@ class RecipeViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Recipes to display: \(recipesList.count)")
         return recipesList.count
     }
 
@@ -66,8 +67,38 @@ class RecipeViewController: UITableViewController {
         cell.configure(title: recipe.title, backgroundImage: recipe.imageURL, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
         return cell
     }
+    //MARK: - Scroll view methods
     
-
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.height {
+//            print("je suis en bas de la tableView")
+//        }
+//        let position = scrollView.contentOffset.y
+//        let scrollViewPosition = tableView.contentSize.height-100-scrollView.frame.size.height
+//        if position > scrollViewPosition {
+            
+            guard RecipeProvider.isLoadingRecipes == false else {
+                return
+            }
+            recipeProvider.fetchRecipes(firstcall: false, loading: true) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .failure(.noRecipeFound):
+                    RecipeProvider.isLoadingRecipes = false
+                    print("No recipe provided")
+                    self.presentSpecificAlert(error: .noRecipeFound)
+                case .success(let recipeDataList):
+                    self.recipesList.append(contentsOf: recipeDataList)
+                    print("Recipes found in RecipeVC: \(recipeDataList.count)")
+                    self.tableView.reloadData()
+                
+                }
+            }
+            print("Recipe in recipesListVC: \(recipesList.count)")
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
