@@ -27,6 +27,13 @@ class DetailsViewController: UIViewController {
         let favoriteButton = FavoriteButton(image: UIImage(systemName: "star"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.tappedFavoriteButton(_:)))
         favoriteButton.tintColor = .green
         navigationItem.rightBarButtonItem = favoriteButton
+        
+        // Initialization of favoriteButton
+        if FavoritesManager.shared.isAFavoriteRecipe(recipe: selectedRecipeUnwrapped) {
+            favoriteButton.isTapped = true
+        } else {
+            favoriteButton.isTapped = false
+        }
     }
    
     
@@ -52,22 +59,16 @@ class DetailsViewController: UIViewController {
         }
         detailedIngredientsListLabel.text = ingredientsListToDisplay
     }
-//    private func checkIfFavorite() -> Bool {
-//        if FavoritesManager.shared.recipes.contains(selectedRecipe) {
-//
-//        }
-//    }
-//
-    @objc private func tappedFavoriteButton(_ sender:FavoriteButton!) {
-//        guard let selectedRecipe = selectedRecipe else {
-//            return
-//        }
 
-        if sender.isTapped == true {
-            sender.isTapped = false
-        } else {
-            sender.isTapped = true
+    @objc private func tappedFavoriteButton(_ sender:FavoriteButton!) {
+        guard let selectedRecipe = selectedRecipe else {
+            return
         }
-        print("Appui sur bouton favori")
+        if sender.isTapped == false {
+            sender.isTapped = true
+        } else {
+            sender.isTapped = false
+        }
+        FavoritesManager.shared.managesFavoriteRecipe(recipe: selectedRecipe)
     }
 }

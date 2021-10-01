@@ -8,6 +8,13 @@
 import UIKit
 
 class FavoriteButton: UIBarButtonItem {
+    override init() {
+        tintColor = .green
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     var isTapped: Bool = false {
         didSet {
             if isTapped == true {
@@ -15,14 +22,6 @@ class FavoriteButton: UIBarButtonItem {
             } else {
                 self.image = UIImage(systemName: "star")
             }
-        }
-    }
-    
-    func setSelectedState(_ set: Bool) {
-        if set {
-            self.image = UIImage(systemName: "star.fill")
-        } else {
-            self.image = UIImage(systemName: "star")
         }
     }
 }

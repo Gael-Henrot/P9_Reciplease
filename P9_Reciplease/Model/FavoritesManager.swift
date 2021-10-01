@@ -14,11 +14,33 @@ class FavoritesManager {
     
     private(set) var recipes = [RecipeData]()
     
-    func add(recipe: RecipeData) {
+    func isAFavoriteRecipe(recipe: RecipeData) -> Bool {
         if recipes.contains(recipe) {
-            return
+            return true
         } else {
-        recipes.append(recipe)
+            return false
         }
+    }
+    
+    func managesFavoriteRecipe(recipe: RecipeData) {
+        if isAFavoriteRecipe(recipe: recipe) == false {
+            add(recipe: recipe)
+        } else {
+            remove(recipe: recipe)
+        }
+    }
+    
+    private func add(recipe: RecipeData) {
+        print("The recipe is added to favorite list.")
+        recipes.append(recipe)
+    }
+    
+    private func remove(recipe: RecipeData) {
+        guard let index = recipes.firstIndex(of: recipe) else {
+            print("The recipe is already not in favorite recipes list...")
+            return
+        }
+        recipes.remove(at: index)
+        print("The recipe is removed from favorite list.")
     }
 }
