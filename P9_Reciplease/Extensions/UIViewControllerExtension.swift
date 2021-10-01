@@ -16,13 +16,22 @@ extension UIViewController {
         case .requestError:
             presentAlert(title: "Error", message: "A problem has occured during the search, please verify your internet connexion.")
         case .noRecipeFound:
-            presentAlert(title: "No recipe found!", message: "No recipe found with the ingredients provided, please try other ingredients.")
+            presentAlert(title: "No recipe found!", message: "No recipe found with the ingredients provided, please try other ingredients.", shouldReturn: true)
         }
     }
     
-    private func presentAlert(title: String, message: String) {
+    private func presentAlert(title: String, message: String, shouldReturn: Bool = false) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        let simpleAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        let returnAction = UIAlertAction(title: "OK", style: .cancel) { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        if shouldReturn {
+            alertVC.addAction(returnAction)
+        } else {
+            alertVC.addAction(simpleAction)
+        }
+//        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }
     
