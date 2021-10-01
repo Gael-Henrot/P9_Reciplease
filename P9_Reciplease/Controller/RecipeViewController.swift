@@ -26,9 +26,9 @@ class RecipeViewController: UITableViewController {
             case .success(let recipeDataList):
                 self.recipesList.append(contentsOf: recipeDataList)
                 print("Recipes found RecipeVC: \(recipeDataList.count)")
-            
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             ProgressHUD.dismiss()
         }
     }

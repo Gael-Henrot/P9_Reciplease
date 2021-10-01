@@ -16,5 +16,5 @@ struct RecipeData: Equatable, RecipeProtocol {
     let detailedIngredientsList: [String]
     let executionTime: String
     let rank: String
-    let originSourceURL: String
+    let sourceURL: String
 }

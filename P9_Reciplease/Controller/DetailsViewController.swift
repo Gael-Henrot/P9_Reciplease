@@ -8,6 +8,7 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
+    
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeTitleLabel: UILabel!
     @IBOutlet weak var detailedIngredientsListLabel: UILabel!
@@ -23,14 +24,15 @@ class DetailsViewController: UIViewController {
             return
         }
         configureDetailsView(with: selectedRecipeUnwrapped)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(tappedFavoriteButton))
+        let favoriteButton = FavoriteButton(image: UIImage(systemName: "star"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.tappedFavoriteButton(_:)))
+        favoriteButton.tintColor = .green
+        navigationItem.rightBarButtonItem = favoriteButton
     }
    
     
-    
     /// Open the default web browser to see the recipe source website when the Get directions button is tapped.
     @IBAction func tappedGetDirectionsButton() {
-        if let selectedRecipeUnwrapped = selectedRecipe, let url = URL(string: selectedRecipeUnwrapped.originSourceURL),
+        if let selectedRecipeUnwrapped = selectedRecipe, let url = URL(string: selectedRecipeUnwrapped.sourceURL),
                 UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:])
         } else {
@@ -50,8 +52,22 @@ class DetailsViewController: UIViewController {
         }
         detailedIngredientsListLabel.text = ingredientsListToDisplay
     }
-    
-    @objc private func tappedFavoriteButton() {
+//    private func checkIfFavorite() -> Bool {
+//        if FavoritesManager.shared.recipes.contains(selectedRecipe) {
+//
+//        }
+//    }
+//
+    @objc private func tappedFavoriteButton(_ sender:FavoriteButton!) {
+//        guard let selectedRecipe = selectedRecipe else {
+//            return
+//        }
+
+        if sender.isTapped == true {
+            sender.isTapped = false
+        } else {
+            sender.isTapped = true
+        }
         print("Appui sur bouton favori")
     }
 }

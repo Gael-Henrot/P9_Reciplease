@@ -43,7 +43,7 @@ struct FakeRecipeProviderResponses {
             "4 tuna steaks",
             "1.0 tbsp olive oil",
             "500.0g bag new potatoes , sliced about 1cm thick",
-            "3 garlic cloves , crushed"], executionTime: "No time.", rank: "No rank.", originSourceURL: "http://www.bbcgoodfood.com/recipes/5876/"), RecipeData(title: "Mashed Tomato Potatoes", imageURL: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg", ingredientsList: [
+            "3 garlic cloves , crushed"], executionTime: "No time.", rank: "No rank.", sourceURL: "http://www.bbcgoodfood.com/recipes/5876/"), RecipeData(title: "Mashed Tomato Potatoes", imageURL: "https://www.edamam.com/web-img/ec2/ec2869a20b214cc7a1c91aab816b92ee.jpg", ingredientsList: [
                 "Yukon Gold potatoes",
                 "garlic"], detailedIngredientsList: [
                 "2 pounds Yukon Gold potatoes (about 6), peeled and cut into 2-inch pieces",
@@ -55,5 +55,5 @@ struct FakeRecipeProviderResponses {
                 "1/2 cup grated Parmesan",
                 "1/2 teaspoon kosher salt",
                 "2 pounds salad tomatoes (about 5 medium), chopped"
-            ], executionTime: "40.0 min.", rank: "No rank.", originSourceURL: "https://www.realsimple.com/food-recipes/browse-all-recipes/mashed-tomato-potatoes")]
+                ], executionTime: "40.0 min.", rank: "No rank.", sourceURL: "https://www.realsimple.com/food-recipes/browse-all-recipes/mashed-tomato-potatoes")]
 }

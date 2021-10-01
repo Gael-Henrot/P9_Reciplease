@@ -26,7 +26,7 @@ class RecipeProvider {
         return APIKeys.edanamAPIKey
     }
     
-    private var nextPageURL: String = ""
+    private var nextPageURL: String = "https://api.edamam.com/api/recipes/v2"
     var isLoadingRecipes: Bool = false
     
     //MARK: - Initializer
@@ -101,14 +101,16 @@ class RecipeProvider {
                         self?.isLoadingRecipes = false
                         return completionHandler(.failure(.noRecipeFound))
                     }
-                    var genericIngredientsList = [String]()
+                    
+                    // Creates the simplified ingredients list for this recipe
+                    var simplifiedIngredientsList = [String]()
                     guard let ingredients = recipe.ingredients else { return }
                     for eachIngredient in ingredients {
                         guard let description = eachIngredient.food else { return }
-                        genericIngredientsList.append(description)
+                        simplifiedIngredientsList.append(description)
                     }
                     // Creation of the unit recipe object (one by recipe)
-                    let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, ingredientsList: genericIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, originSourceURL: recipe.originSourceURL)
+                    let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, ingredientsList: simplifiedIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, sourceURL: recipe.sourceURL)
                     guard let nextPageURL = recipeList.links?.next?.href else { return }
                     self?.nextPageURL = nextPageURL
                     recipesList.append(recipeData)

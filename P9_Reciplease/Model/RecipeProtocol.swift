@@ -14,5 +14,5 @@ protocol RecipeProtocol {
     var detailedIngredientsList: [String] { get }
     var executionTime: String { get }
     var rank: String { get }
-    var originSourceURL: String { get }
+    var sourceURL: String { get }
 }

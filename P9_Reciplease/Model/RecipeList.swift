@@ -129,7 +129,7 @@ extension Recipe: RecipeProtocol {
             return "No rank."
             }
     }
-    var originSourceURL: String {
+    var sourceURL: String {
         get {
             if let originSourceURL = url {
                 return originSourceURL
