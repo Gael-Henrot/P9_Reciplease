@@ -1,25 +1,20 @@
 //
-//  RecipeTableViewCell.swift
+//  RecipeCell.swift
 //  P9_Reciplease
 //
-//  Created by Gaël HENROT on 13/09/2021.
+//  Created by Gaël HENROT on 04/10/2021.
 //
 
 import UIKit
 import Alamofire
 import SDWebImage
 
-class RecipeTableViewCell: UITableViewCell {
+class RecipeCell: UITableViewCell {
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeTitleLabel: UILabel!
     @IBOutlet weak var ingredientsListLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
     func configure(title: String, backgroundImage: String, ingredientsList: [String], rank: String, time: String) {
         recipeImage.sd_setImage(with: URL(string: backgroundImage), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
@@ -43,5 +38,4 @@ class RecipeTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

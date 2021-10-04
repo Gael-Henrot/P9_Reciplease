@@ -14,9 +14,15 @@ class RecipeViewController: UITableViewController {
     var ingredientsList = [String]()
     var recipesList = [RecipeData]()
     var selectedRecipe: RecipeData?
+    let segueToDetailsId = "segueToDetails"
+    let recipeCellId = "RecipeCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let recipeCellNib = UINib(nibName: recipeCellId, bundle: nil)
+        tableView.register(recipeCellNib, forCellReuseIdentifier: recipeCellId)
+        
         ProgressHUD.show("Loading the recipes...")
         recipeProvider.fetchRecipes(with: ingredientsList) { [weak self] result in
             guard let self = self else { return }
@@ -36,11 +42,11 @@ class RecipeViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             selectedRecipe = recipesList[indexPath.row]
-            performSegue(withIdentifier: "segueToDetails", sender: nil)
+            performSegue(withIdentifier: segueToDetailsId, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToDetails" {
+        if segue.identifier == segueToDetailsId {
             let detailsVC = segue.destination as! DetailsViewController
             detailsVC.selectedRecipe = selectedRecipe
         }
@@ -58,7 +64,7 @@ class RecipeViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: recipeCellId, for: indexPath) as? RecipeCell else {
             return UITableViewCell()
         }
         
