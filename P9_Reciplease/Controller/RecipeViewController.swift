@@ -14,7 +14,7 @@ class RecipeViewController: UITableViewController {
     var ingredientsList = [String]()
     var recipesList = [RecipeData]()
     var selectedRecipe: RecipeData?
-    let segueToDetailsId = "segueToDetails"
+    let segueToDetailsId = "segueSearchToDetails"
     let recipeCellId = "RecipeCell"
 
     override func viewDidLoad() {
@@ -49,6 +49,7 @@ class RecipeViewController: UITableViewController {
         if segue.identifier == segueToDetailsId {
             let detailsVC = segue.destination as! DetailsViewController
             detailsVC.selectedRecipe = selectedRecipe
+            detailsVC.previousVC = self
         }
     }
 

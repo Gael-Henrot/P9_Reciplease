@@ -14,16 +14,10 @@ class FavoritesManager {
     
     private(set) var recipes = [RecipeData]()
     
-    func isAFavoriteRecipe(recipe: RecipeData) -> Bool {
-        if recipes.contains(recipe) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
+    /// Manages the recipe in the FavoritesManager recipes list: if the recipe is not in the list, the method will put the recipe in the list. If the recipe is already in the list, the method will remove it.
+    /// - Parameter recipe: the recipe to manage.
     func managesFavoriteRecipe(recipe: RecipeData) {
-        if isAFavoriteRecipe(recipe: recipe) == false {
+        if recipe.isAFavorite == false {
             add(recipe: recipe)
         } else {
             remove(recipe: recipe)

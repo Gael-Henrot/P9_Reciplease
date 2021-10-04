@@ -14,7 +14,7 @@ class IngredientViewController: UIViewController {
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var ingredientsTextView: UITextView!
     
-    let initialAdvice: String = "Add a new ingredient in the list to begin the search. No need to use plural."
+    let initialAdvice: String = "Add a new ingredient in the list to begin the search. \nNo need to use plural."
     var ingredientsListToDisplay: String = ""
     var ingredientsList = [String]()
     

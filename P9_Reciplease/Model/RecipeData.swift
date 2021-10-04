@@ -18,3 +18,15 @@ struct RecipeData: Equatable, RecipeProtocol {
     let rank: String
     let sourceURL: String
 }
+
+extension RecipeData {
+    var isAFavorite: Bool {
+        get {
+            if FavoritesManager.shared.recipes.contains(self) {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+}

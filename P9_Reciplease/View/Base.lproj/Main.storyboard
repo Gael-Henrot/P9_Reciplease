@@ -161,7 +161,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="LsZ-Xw-lf3"/>
                     <connections>
-                        <segue destination="U4K-lw-Ttk" kind="show" identifier="segueToDetails" id="5S5-MJ-14a"/>
+                        <segue destination="U4K-lw-Ttk" kind="show" identifier="segueSearchToDetails" id="5S5-MJ-14a"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTa-DU-bTL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -287,14 +287,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="raU-n0-7pR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3127.536231884058" y="-218.30357142857142"/>
+            <point key="canvasLocation" x="3196" y="156"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="6em-yL-IGl">
             <objects>
-                <tableViewController id="x2o-WD-9Tg" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1XY-Pt-ebm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                <tableViewController id="x2o-WD-9Tg" customClass="FavoriteViewController" customModule="P9_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1XY-Pt-ebm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <connections>
@@ -303,6 +303,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Favorites" id="lqs-Jc-jYg"/>
+                    <connections>
+                        <segue destination="U4K-lw-Ttk" kind="show" identifier="segueFavoriteToDetails" id="iGD-ng-kf8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdz-ra-MoX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -313,9 +316,10 @@
             <objects>
                 <navigationController id="Z4m-lu-XCn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" selectedImage="star.fill" catalog="system" systemItem="favorites" id="ZpT-Oj-QxT"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="paj-ud-Xu4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="paj-ud-Xu4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.20000001789999999" blue="0.19607841970000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <connections>
                         <segue destination="x2o-WD-9Tg" kind="relationship" relationship="rootViewController" id="aOt-FV-XGR"/>
@@ -344,6 +348,9 @@
             <point key="canvasLocation" x="-250" y="55"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iGD-ng-kf8"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>

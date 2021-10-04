@@ -16,9 +16,10 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     
     var selectedRecipe: RecipeData?
+    var previousVC: UIViewController?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         guard let selectedRecipeUnwrapped = selectedRecipe else {
             print("No recipe selected")
             return
@@ -70,5 +71,8 @@ class DetailsViewController: UIViewController {
             sender.isTapped = false
         }
         FavoritesManager.shared.managesFavoriteRecipe(recipe: selectedRecipe)
+        if previousVC is FavoriteViewController {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
