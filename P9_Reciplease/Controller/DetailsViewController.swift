@@ -30,7 +30,7 @@ class DetailsViewController: UIViewController {
         navigationItem.rightBarButtonItem = favoriteButton
         
         // Initialization of favoriteButton
-        if FavoritesManager.shared.isAFavoriteRecipe(recipe: selectedRecipeUnwrapped) {
+        if selectedRecipeUnwrapped.isAFavorite {
             favoriteButton.isTapped = true
         } else {
             favoriteButton.isTapped = false
