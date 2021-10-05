@@ -15,7 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    var selectedRecipe: RecipeData?
+    var selectedRecipe: RecipeProtocol?
     var previousVC: UIViewController?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +48,7 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    private func configureDetailsView(with recipe: RecipeData) {
+    private func configureDetailsView(with recipe: RecipeProtocol) {
         var ingredientsListToDisplay: String = ""
         recipeImage.sd_setImage(with: URL(string: recipe.imageURL), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
         recipeTitleLabel.text = recipe.title

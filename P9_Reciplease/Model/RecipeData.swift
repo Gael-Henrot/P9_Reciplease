@@ -19,14 +19,14 @@ struct RecipeData: Equatable, RecipeProtocol {
     let sourceURL: String
 }
 
-extension RecipeData {
-    var isAFavorite: Bool {
-        get {
-            if FavoritesManager.shared.recipes.contains(self) {
-                return true
-            } else {
-                return false
-            }
-        }
-    }
-}
+//extension RecipeData {
+//    var isAFavorite: Bool {
+//        get {
+//            if FavoritesManager.shared.recipes.contains(self) {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
+//    }
+//}

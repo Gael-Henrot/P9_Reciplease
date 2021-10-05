@@ -36,6 +36,7 @@
 		7CF02048270B28B700BFDED1 /* RecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF02046270B28B700BFDED1 /* RecipeCell.xib */; };
 		7CF0204A270B333A00BFDED1 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF02049270B333A00BFDED1 /* FavoriteViewController.swift */; };
 		7CF0204C270B736D00BFDED1 /* FavoritesManagerTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0204B270B736D00BFDED1 /* FavoritesManagerTestCases.swift */; };
+		7CF02052270C357E00BFDED1 /* FavoriteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF02051270C357E00BFDED1 /* FavoriteRecipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		7CF02046270B28B700BFDED1 /* RecipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeCell.xib; sourceTree = "<group>"; };
 		7CF02049270B333A00BFDED1 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		7CF0204B270B736D00BFDED1 /* FavoritesManagerTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManagerTestCases.swift; sourceTree = "<group>"; };
+		7CF02051270C357E00BFDED1 /* FavoriteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipe.swift; sourceTree = "<group>"; };
 		7D6531FD7D198D98C620AE4F /* Pods_P9_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P9_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82DEF5198A0D2F0EF269F23F /* Pods-P9_RecipleaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P9_RecipleaseTests.debug.xcconfig"; path = "Target Support Files/Pods-P9_RecipleaseTests/Pods-P9_RecipleaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B330047197BFDA10FCDE9A91 /* Pods-P9_Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P9_Reciplease.release.xcconfig"; path = "Target Support Files/Pods-P9_Reciplease/Pods-P9_Reciplease.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,7 +147,6 @@
 				7C80A0AE26E7B403007D4D25 /* View */,
 				7C80A0AD26E7B3F5007D4D25 /* Controller */,
 				7C80A0A726E7B3F0007D4D25 /* Info.plist */,
-				7C80A09F26E7B3EE007D4D25 /* P9_Reciplease.xcdatamodeld */,
 				7CBE8F9C26F4C1B90086976C /* Extensions */,
 			);
 			path = P9_Reciplease;
@@ -178,6 +179,7 @@
 		7C80A0AF26E7B40D007D4D25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C80A09F26E7B3EE007D4D25 /* P9_Reciplease.xcdatamodeld */,
 				7C80A0B526E8C3F8007D4D25 /* NetworkClient.swift */,
 				7CF0203726FDFB9400BFDED1 /* RecipeProvider.swift */,
 				7CF0202D26FC8C5000BFDED1 /* RecipeProtocol.swift */,
@@ -185,6 +187,7 @@
 				7CBE8F9826F226190086976C /* RecipeData.swift */,
 				7CBE8F9A26F359200086976C /* APIKeys.swift */,
 				7CF0202726FC688E00BFDED1 /* FavoritesManager.swift */,
+				7CF02051270C357E00BFDED1 /* FavoriteRecipe.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				7CF0202826FC688E00BFDED1 /* FavoritesManager.swift in Sources */,
 				7CBE8F9B26F359200086976C /* APIKeys.swift in Sources */,
 				7CBE8F9326EF7A9F0086976C /* RecipeViewController.swift in Sources */,
+				7CF02052270C357E00BFDED1 /* FavoriteRecipe.swift in Sources */,
 				7CF02047270B28B700BFDED1 /* RecipeCell.swift in Sources */,
 				7C80A09726E7B3EE007D4D25 /* AppDelegate.swift in Sources */,
 				7C80A0B226E7C89D007D4D25 /* IngredientViewController.swift in Sources */,

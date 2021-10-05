@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoriteViewController: UITableViewController {
     
-    var selectedRecipe: RecipeData?
+    var selectedRecipe: RecipeProtocol?
     let segueToDetailsId = "segueFavoriteToDetails"
     let recipeCellId = "RecipeCell"
 
@@ -21,7 +22,7 @@ class FavoriteViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if FavoritesManager.shared.recipes.isEmpty {
+        if FavoriteRecipe.all.isEmpty {
             tableView.tableHeaderView = createHeader()
         } else {
             tableView.tableHeaderView = nil
@@ -30,7 +31,7 @@ class FavoriteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRecipe = FavoritesManager.shared.recipes[indexPath.row]
+        selectedRecipe = FavoriteRecipe.all[indexPath.row]
             performSegue(withIdentifier: segueToDetailsId, sender: nil)
     }
     
@@ -63,7 +64,7 @@ class FavoriteViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return FavoritesManager.shared.recipes.count
+        return FavoriteRecipe.all.count
     }
 
     
@@ -72,7 +73,7 @@ class FavoriteViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        let recipe = FavoritesManager.shared.recipes[indexPath.row]
+        let recipe = FavoriteRecipe.all[indexPath.row]
         
         cell.configure(title: recipe.title, backgroundImage: recipe.imageURL, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
 

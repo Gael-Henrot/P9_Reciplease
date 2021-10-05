@@ -13,7 +13,7 @@ class RecipeViewController: UITableViewController {
     let recipeProvider = RecipeProvider()
     var ingredientsList = [String]()
     var recipesList = [RecipeData]()
-    var selectedRecipe: RecipeData?
+    var selectedRecipe: RecipeProtocol?
     let segueToDetailsId = "segueSearchToDetails"
     let recipeCellId = "RecipeCell"
 
@@ -79,7 +79,7 @@ class RecipeViewController: UITableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-        if offsetY > contentHeight - scrollView.frame.height + 100 {
+        if offsetY > contentHeight - scrollView.frame.height + 25 {
             
             guard recipeProvider.isLoadingRecipes == false else {
                 return

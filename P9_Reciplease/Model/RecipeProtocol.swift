@@ -16,3 +16,15 @@ protocol RecipeProtocol {
     var rank: String { get }
     var sourceURL: String { get }
 }
+
+extension RecipeProtocol {
+    var isAFavorite: Bool {
+        get {
+            if self is FavoriteRecipe {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+}
