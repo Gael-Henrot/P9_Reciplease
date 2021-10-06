@@ -79,6 +79,12 @@ class RecipeViewController: UITableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
+        
+        // While the tableView content don't fill the screen, the second
+        while contentHeight < scrollView.frame.height {
+            return
+        }
+        
         if offsetY > contentHeight - scrollView.frame.height + 25 {
             
             guard recipeProvider.isLoadingRecipes == false else {
@@ -93,7 +99,7 @@ class RecipeViewController: UITableViewController {
                 case .failure(.noRecipeFound):
                     self.recipeProvider.isLoadingRecipes = false
                     print("No recipe provided")
-                    self.presentSpecificAlert(error: .noRecipeFound)
+                    self.presentSpecificAlert(error: .noMoreRecipes)
                 case .success(let recipeDataList):
                     self.recipesList.append(contentsOf: recipeDataList)
                     print("Recipes found in RecipeVC: \(recipeDataList.count)")

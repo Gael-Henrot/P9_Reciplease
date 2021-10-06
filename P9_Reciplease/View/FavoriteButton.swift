@@ -8,10 +8,9 @@
 import UIKit
 
 class FavoriteButton: UIBarButtonItem {
-
-    var isTapped: Bool = false {
+    var isFavorite: Bool = false {
         didSet {
-            if isTapped == true {
+            if isFavorite == true {
                 self.image = UIImage(systemName: "star.fill")
             } else {
                 self.image = UIImage(systemName: "star")

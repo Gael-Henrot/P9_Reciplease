@@ -20,7 +20,9 @@ protocol RecipeProtocol {
 extension RecipeProtocol {
     var isAFavorite: Bool {
         get {
-            if self is FavoriteRecipe {
+            if FavoriteRecipe.all.contains(where: { favoriteRecipe in
+                            return (favoriteRecipe.title == self.title) && (favoriteRecipe.sourceURL == self.sourceURL)
+                        }) {
                 return true
             } else {
                 return false

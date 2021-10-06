@@ -17,6 +17,8 @@ extension UIViewController {
             presentAlert(title: "Error", message: "A problem has occured during the search, please verify your internet connexion.")
         case .noRecipeFound:
             presentAlert(title: "No recipe found!", message: "No recipe found with the ingredients provided, please try other ingredients.", shouldReturn: true)
+        case .noMoreRecipes:
+            presentAlert(title: "No more recipe found!", message: "No other recipes were found with the current search criteria...")
         }
     }
     
@@ -31,11 +33,10 @@ extension UIViewController {
         } else {
             alertVC.addAction(simpleAction)
         }
-//        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }
     
     enum ErrorType {
-        case noIngredientProvided, requestError, noRecipeFound
+        case noIngredientProvided, requestError, noRecipeFound, noMoreRecipes
     }
 }

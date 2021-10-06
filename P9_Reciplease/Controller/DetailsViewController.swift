@@ -17,6 +17,7 @@ class DetailsViewController: UIViewController {
     
     var selectedRecipe: RecipeProtocol?
     var previousVC: UIViewController?
+    let favoritesManager = FavoritesManager()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,20 +26,22 @@ class DetailsViewController: UIViewController {
             return
         }
         configureDetailsView(with: selectedRecipeUnwrapped)
+        
+        // Creation of favoriteButton
         let favoriteButton = FavoriteButton(image: UIImage(systemName: "star"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.tappedFavoriteButton(_:)))
         favoriteButton.tintColor = .green
         navigationItem.rightBarButtonItem = favoriteButton
         
         // Initialization of favoriteButton
         if selectedRecipeUnwrapped.isAFavorite {
-            favoriteButton.isTapped = true
+            favoriteButton.isFavorite = true
         } else {
-            favoriteButton.isTapped = false
+            favoriteButton.isFavorite = false
         }
     }
    
     
-    /// Open the default web browser to see the recipe source website when the Get directions button is tapped.
+    /// Open the default web browser to see the recipe source website when the "Get directions button" is tapped.
     @IBAction func tappedGetDirectionsButton() {
         if let selectedRecipeUnwrapped = selectedRecipe, let url = URL(string: selectedRecipeUnwrapped.sourceURL),
                 UIApplication.shared.canOpenURL(url) {
@@ -65,12 +68,12 @@ class DetailsViewController: UIViewController {
         guard let selectedRecipe = selectedRecipe else {
             return
         }
-        if sender.isTapped == false {
-            sender.isTapped = true
+        if sender.isFavorite == false {
+            sender.isFavorite = true
         } else {
-            sender.isTapped = false
+            sender.isFavorite = false
         }
-        FavoritesManager.shared.managesFavoriteRecipe(recipe: selectedRecipe)
+        favoritesManager.managesFavoriteRecipe(recipe: selectedRecipe)
         if previousVC is FavoriteViewController {
             navigationController?.popViewController(animated: true)
         }
