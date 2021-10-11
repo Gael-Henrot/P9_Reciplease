@@ -17,7 +17,14 @@ class DetailsViewController: UIViewController {
     
     var selectedRecipe: RecipeProtocol?
     var previousVC: UIViewController?
-    let favoritesManager = FavoritesManager()
+    var favoritesManager: FavoritesManager?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let coreDataStack = appDelegate.coreDataStack
+        favoritesManager = FavoritesManager(coreDataStack: coreDataStack)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,7 +40,7 @@ class DetailsViewController: UIViewController {
         navigationItem.rightBarButtonItem = favoriteButton
         
         // Initialization of favoriteButton
-        if selectedRecipeUnwrapped.isAFavorite {
+        if ((favoritesManager?.recipeIsFavorite(selectedRecipeUnwrapped)) != nil) {
             favoriteButton.isFavorite = true
         } else {
             favoriteButton.isFavorite = false
@@ -73,7 +80,7 @@ class DetailsViewController: UIViewController {
         } else {
             sender.isFavorite = false
         }
-        favoritesManager.managesFavoriteRecipe(recipe: selectedRecipe)
+        favoritesManager?.managesFavoriteRecipe(recipe: selectedRecipe)
         if previousVC is FavoriteViewController {
             navigationController?.popViewController(animated: true)
         }

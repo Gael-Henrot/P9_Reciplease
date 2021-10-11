@@ -9,7 +9,7 @@ import Foundation
 
 // This is the condensed data model structure needed by the application.
 
-struct RecipeData: RecipeProtocol {
+struct RecipeData: RecipeProtocol, Equatable {
     let title: String
     let imageURL: String
     let ingredientsList: [String]

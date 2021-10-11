@@ -13,16 +13,24 @@ class FavoriteViewController: UITableViewController {
     var selectedRecipe: RecipeProtocol?
     let segueToDetailsId = "segueFavoriteToDetails"
     let recipeCellId = "RecipeCell"
+    var favoritesManager: FavoritesManager?
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let recipeCellNib = UINib(nibName: recipeCellId, bundle: nil)
         tableView.register(recipeCellNib, forCellReuseIdentifier: recipeCellId)
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let coreDataStack = appDelegate.coreDataStack
+        favoritesManager = FavoritesManager(coreDataStack: coreDataStack)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if FavoriteRecipe.all.isEmpty {
+        
+        if favoritesManager?.favorites == nil {
             tableView.tableHeaderView = createHeader()
         } else {
             tableView.tableHeaderView = nil
@@ -31,7 +39,8 @@ class FavoriteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRecipe = FavoriteRecipe.all[indexPath.row]
+        guard let all = favoritesManager?.favorites else { return }
+        selectedRecipe = all[indexPath.row]
             performSegue(withIdentifier: segueToDetailsId, sender: nil)
     }
     
@@ -63,8 +72,8 @@ class FavoriteViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return FavoriteRecipe.all.count
+        guard let all = favoritesManager?.favorites else { return 0 }
+        return all.count
     }
 
     
@@ -72,8 +81,9 @@ class FavoriteViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: recipeCellId, for: indexPath) as? RecipeCell else {
             return UITableViewCell()
         }
+        guard let all = favoritesManager?.favorites else { return UITableViewCell()}
         
-        let recipe = FavoriteRecipe.all[indexPath.row]
+        let recipe = all[indexPath.row]
         
         cell.configure(title: recipe.title, backgroundImage: recipe.imageURL, ingredientsList: recipe.ingredientsList, rank: recipe.rank, time: recipe.executionTime)
 

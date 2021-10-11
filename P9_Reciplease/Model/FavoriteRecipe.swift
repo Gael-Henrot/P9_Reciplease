@@ -72,11 +72,11 @@ class FavoriteRecipe: NSManagedObject, RecipeProtocol {
         }
     }
     
-    static var all: [FavoriteRecipe] {
-        let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
-        guard let recipes = try? AppDelegate.viewContext.fetch(request) else {
-            return []
-        }
-        return recipes
-    }
+//    static var all: [FavoriteRecipe] {
+//        let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
+//        guard let recipes = try? AppDelegate.viewContext.fetch(request) else {
+//            return []
+//        }
+//        return recipes
+//    }
 }
