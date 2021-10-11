@@ -12,7 +12,7 @@ class RecipeViewController: UITableViewController {
     
     let recipeProvider = RecipeProvider()
     var ingredientsList = [String]()
-    var recipesList = [RecipeData]()
+    var recipesList = [Recipe]()
     var selectedRecipe: RecipeProtocol?
     let segueToDetailsId = "segueSearchToDetails"
     let recipeCellId = "RecipeCell"

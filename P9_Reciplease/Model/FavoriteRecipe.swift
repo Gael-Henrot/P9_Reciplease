@@ -10,73 +10,30 @@ import CoreData
 
 class FavoriteRecipe: NSManagedObject, RecipeProtocol {
     var title: String {
-        get {
-            guard let title = fTitle else {
-                return "No title"
-            }
-            return title
-        }
+        return fTitle ?? "No title."
     }
     
     var imageURL: String {
-        get {
-            guard let imageURL = fImageURL else {
-                return "No image URL"
-            }
-            return imageURL
-        }
+        return fImageURL ?? "No image."
     }
     
     var ingredientsList: [String] {
-        get {
-            guard let ingredientsList = fIngredientsList else {
-                return ["No ingredient"]
-            }
-            return ingredientsList
-        }
+        return fIngredientsList ?? ["No ingredient."]
     }
     
     var detailedIngredientsList: [String] {
-        get {
-            guard let detailedIngredientsList = fDetailedIngredientsList else {
-                return ["No ingredient"]
-            }
-            return detailedIngredientsList
-        }
+        return fDetailedIngredientsList ?? ["No ingredient."]
     }
     
     var executionTime: String {
-        get {
-            guard let executionTime = fExecutionTime else {
-                return "No time."
-            }
-            return executionTime
-        }
+        return fExecutionTime ?? "No time."
     }
     
     var rank: String {
-        get {
-            guard let rank = fRank else {
-                return "No rank."
-            }
-            return rank
-        }
+        return fRank ?? "No rank."
     }
     
     var sourceURL: String {
-        get {
-            guard let sourceURL = fSourceURL else {
-                return "No source URL"
-            }
-            return sourceURL
-        }
+        return fSourceURL ?? "No source URL."
     }
-    
-//    static var all: [FavoriteRecipe] {
-//        let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
-//        guard let recipes = try? AppDelegate.viewContext.fetch(request) else {
-//            return []
-//        }
-//        return recipes
-//    }
 }

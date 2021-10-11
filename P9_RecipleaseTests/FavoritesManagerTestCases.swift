@@ -11,11 +11,11 @@ import XCTest
 class FavoritesManagerTestCases: XCTestCase {
     
     //MARK: - Properties
-    
     var coreDataStack: MockCoreDataStack!
     var favoritesManager: FavoritesManager!
-    let recipe = RecipeData(title: "Recipe1", imageURL: "URL-of-Image", ingredientsList: ["Ingredient1", "Ingredient2"], detailedIngredientsList: ["Detailed Ingredient1", "Detailed Ingredient2"], executionTime: "10", rank: "No rank.", sourceURL: "URL-of-Source")
+    let recipe = Recipe(label: "Recipe1", image: "URL-of-Image", source: "Source Website", url: "URL-of-Source", ingredientLines: ["Ingredient1", "Ingredient2"], ingredients: [Ingredient(text: "Ingredient1", quantity: 1.0, measure: nil, food: "Detailed Ingredient1", weight: nil, image: nil), Ingredient(text: "Ingredient2", quantity: 1.0, measure: nil, food: "Detailed Ingredient2", weight: nil, image: nil)], totalTime: 10.0)
     
+    //MARK: - Tests Life Cycle
     override func setUp() {
         super.setUp()
         coreDataStack = MockCoreDataStack()
@@ -28,6 +28,7 @@ class FavoritesManagerTestCases: XCTestCase {
         coreDataStack = nil
     }
     
+    //MARK: - Tests
     func testGivenTheFavoritesAreEmpty_WhenARecipeIsManagedInFavorites_ThenTheRecipeIsAddedToFavorites() {
         favoritesManager.managesFavoriteRecipe(recipe: recipe)
         XCTAssert(favoritesManager.favorites.isEmpty == false)
@@ -39,17 +40,5 @@ class FavoritesManagerTestCases: XCTestCase {
         favoritesManager.managesFavoriteRecipe(recipe: recipe)
         favoritesManager.managesFavoriteRecipe(recipe: recipe)
         XCTAssert(favoritesManager.favorites.isEmpty == true)
-        
     }
-//    func testGivenTheFavoritesListIsEmpty_WhenARecipeIsManaged_ThenTheRecipeIsAddToFavoriteList() {
-//        FavoritesManager.shared.managesFavoriteRecipe(recipe: recipe)
-//        XCTAssertEqual(FavoritesManager.shared.recipes, [recipe])
-//    }
-//    
-//    func testGivenTheFavoritesListContainsTheRecipe_WhenTheRecipeIsManaged_ThenTheRecipeIsRemoveToFavoriteList() {
-//        FavoritesManager.shared.managesFavoriteRecipe(recipe: recipe)
-//        FavoritesManager.shared.managesFavoriteRecipe(recipe: recipe)
-//        XCTAssertEqual(FavoritesManager.shared.recipes, [])
-//    }
 }
-

@@ -16,17 +16,3 @@ protocol RecipeProtocol {
     var rank: String { get }
     var sourceURL: String { get }
 }
-
-//extension RecipeProtocol {
-//    var isAFavorite: Bool {
-//        get {
-//            if FavoriteRecipe.all.contains(where: { favoriteRecipe in
-//                            return (favoriteRecipe.title == self.title) && (favoriteRecipe.sourceURL == self.sourceURL)
-//                        }) {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }
-//    }
-//}

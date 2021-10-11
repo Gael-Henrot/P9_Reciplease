@@ -17,7 +17,12 @@ class RecipeCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     
     func configure(title: String, backgroundImage: String, ingredientsList: [String], rank: String, time: String) {
-        recipeImage.sd_setImage(with: URL(string: backgroundImage), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
+        if backgroundImage != "No image." {
+            recipeImage.sd_setImage(with: URL(string: backgroundImage), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
+        } else {
+            guard let defaultImage = UIImage(named: "Recipe Default Image") else { return }
+            recipeImage.image = defaultImage
+        }
         recipeTitleLabel.text = title
         rankLabel.text = rank
         timeLabel.text = time

@@ -11,7 +11,6 @@ import CoreData
 class FavoritesManager {
     
     //MARK: - Properties
-//    static var shared = FavoritesManager()
     private let coreDataStack: CoreDataStack
     private let managedObjectContext: NSManagedObjectContext
     
@@ -24,7 +23,6 @@ class FavoritesManager {
     }
 
     //MARK: - Initializer
-//    private init(){}
     init(coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
         self.managedObjectContext = coreDataStack.mainContext
@@ -42,12 +40,6 @@ class FavoritesManager {
             print("The recipe is removed from favorite list.")
         }
     }
-    
-//    func allFavoriteRecipes() -> [FavoriteRecipe]? {
-//            let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
-//            let results = try? managedObjectContext.fetch(request)
-//            return results
-//        }
     
     func recipeIsFavorite(_ recipe: RecipeProtocol) -> Bool {
             if favorites.contains(where: { favoriteRecipe in
@@ -74,6 +66,7 @@ class FavoritesManager {
     
     private func removeTheRecipe(recipe: RecipeProtocol) {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
+        request.predicate = NSPredicate(format: "fTitle == %@", "\(recipe.title)")
         request.predicate = NSPredicate(format: "fSourceURL == %@", "\(recipe.sourceURL)")
         guard let results = try? managedObjectContext.fetch(request) else {
             return
@@ -82,29 +75,4 @@ class FavoritesManager {
         let recipeToDelete = results[0]
         coreDataStack.mainContext.delete(recipeToDelete)
     }
-//    private func removeTheRecipe(recipe: RecipeProtocol) {
-//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipe")
-//        request.predicate = NSPredicate(format: "fTitle == %@", "\(recipe.title)")
-//        request.predicate = NSPredicate(format: "fSourceURL == %@", "\(recipe.sourceURL)")
-//
-//        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-//
-//        do {
-//            try managedObjectContext.execute(batchDeleteRequest)
-//        } catch {
-//            print("The recipe cannot be deleted.")
-//        }
-//    }
-    
-//    func recipeIsFavorite(_ recipe: RecipeProtocol) -> Bool {
-//        let request = FavoriteRecipe.fetchRequest()
-//        let results = AppDelegate.viewContext.fetch(request)
-//        if results.contains(where: { favoriteRecipe in
-//            return favoriteRecipe.sourceURL == recipe.sourceURL
-//        }) {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
 }

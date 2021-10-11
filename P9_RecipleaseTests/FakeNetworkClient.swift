@@ -10,12 +10,13 @@ import Alamofire
 @testable import P9_Reciplease
 
 struct MockClient: NetworkClientType {
+    //MARK: - Properties
+    let fakeResponses: FakeResponses
+    
+    //MARK: - Methods
     func makeRequest<T>(for url: String, withMethod method: HTTPMethod?, parameters: [String : String]?, callback: @escaping ((Result<T, NetworkError>) -> Void)) where T : Decodable, T : Encodable {
         callback(fakeResponses.fakeResponse as! Result<T, NetworkError>)
     }
-    
-    
-    let fakeResponses: FakeResponses
     
     struct FakeResponses {
         let fakeResponse: Result<RecipeList, NetworkError>

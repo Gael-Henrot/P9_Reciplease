@@ -20,7 +20,6 @@
 		7CBE8F9126EF70B10086976C /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9026EF70B10086976C /* RecipeList.swift */; };
 		7CBE8F9326EF7A9F0086976C /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9226EF7A9F0086976C /* RecipeViewController.swift */; };
 		7CBE8F9726F1DCBF0086976C /* APIKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9626F1DCBF0086976C /* APIKeys.json */; };
-		7CBE8F9926F226190086976C /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9826F226190086976C /* RecipeData.swift */; };
 		7CBE8F9B26F359200086976C /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9A26F359200086976C /* APIKeys.swift */; };
 		7CBE8FA026F875AC0086976C /* NetworkServiceTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8F9F26F875AC0086976C /* NetworkServiceTestCases.swift */; };
 		7CBE8FA226F8D7DB0086976C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8FA126F8D7DB0086976C /* DetailsViewController.swift */; };
@@ -70,7 +69,6 @@
 		7CBE8F9026EF70B10086976C /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
 		7CBE8F9226EF7A9F0086976C /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		7CBE8F9626F1DCBF0086976C /* APIKeys.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APIKeys.json; sourceTree = "<group>"; };
-		7CBE8F9826F226190086976C /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		7CBE8F9A26F359200086976C /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		7CBE8F9F26F875AC0086976C /* NetworkServiceTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTestCases.swift; sourceTree = "<group>"; };
 		7CBE8FA126F8D7DB0086976C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 				7CF0203726FDFB9400BFDED1 /* RecipeProvider.swift */,
 				7CF0202D26FC8C5000BFDED1 /* RecipeProtocol.swift */,
 				7CBE8F9026EF70B10086976C /* RecipeList.swift */,
-				7CBE8F9826F226190086976C /* RecipeData.swift */,
 				7CBE8F9A26F359200086976C /* APIKeys.swift */,
 				7CF0202726FC688E00BFDED1 /* FavoritesManager.swift */,
 				7CF02051270C357E00BFDED1 /* FavoriteRecipe.swift */,
@@ -439,7 +436,6 @@
 				7CF020622714173D00BFDED1 /* CoreDataStack.swift in Sources */,
 				7C80A09926E7B3EE007D4D25 /* SceneDelegate.swift in Sources */,
 				7CF0202E26FC8C5000BFDED1 /* RecipeProtocol.swift in Sources */,
-				7CBE8F9926F226190086976C /* RecipeData.swift in Sources */,
 				7CF0203826FDFB9400BFDED1 /* RecipeProvider.swift in Sources */,
 				7CF020402706201000BFDED1 /* FavoriteButton.swift in Sources */,
 				7CF0204A270B333A00BFDED1 /* FavoriteViewController.swift in Sources */,

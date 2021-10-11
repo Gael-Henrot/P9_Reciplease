@@ -10,10 +10,7 @@ import Alamofire
 @testable import P9_Reciplease
 
 class NetworkServiceTestCases: XCTestCase {
-    
-    override func setUp() {
-//        MockURLProtocol.registerClass(MockURLProtocol.self)
-    }
+    //MARK: - Tests
     func testFetchRecipesSuccessCase() {
         let expectation = self.expectation(description: "Success")
         let client = MockClient(fakeResponses: .success)

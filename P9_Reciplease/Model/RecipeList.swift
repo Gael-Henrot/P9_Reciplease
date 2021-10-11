@@ -80,62 +80,50 @@ struct RecipeListLinks: Codable {
     let next: Next?
 }
 
-// Allows to easily convert the API result into a value or a default value if the value does not exist.
-extension Recipe: RecipeProtocol {
-    var title: String {
-        get {
-            if let title = label {
-                return title
-            } else {
-                return "No title."
-            }
+extension Recipe: RecipeProtocol, Equatable {
+    static func == (lhs: Recipe, rhs: Recipe) -> Bool {
+        if lhs.title == rhs.title && lhs.sourceURL == rhs.sourceURL {
+            return true
+        } else {
+            return false
         }
     }
     
+    var title: String {
+        return label ?? "No title."
+    }
+    
     var imageURL: String {
-        get {
-            if let image = image {
-                return image
-            } else {
-            return "No image found."
-            }
-        }
+        return image ?? "No image."
     }
+    
     var ingredientsList: [String] {
-        get {
-            return [""]
+        var list = [String]()
+        guard let ingredients = self.ingredients else { return ["No ingredient."] }
+        for each in ingredients {
+            guard let description = each.food else { return ["No ingredient."] }
+            list.append(description)
         }
+        return list
     }
+    
     var detailedIngredientsList: [String] {
-        get {
-            if let DetailedIngredientsList = ingredientLines {
-                return DetailedIngredientsList
-            } else {
-            return ["No ingredient provided."]
-            }
-        }
+        return ingredientLines ?? ["No ingredient."]
     }
+    
     var executionTime: String {
-        get {
-            if let executionTime = totalTime, totalTime != 0 {
-                return "\(String(executionTime)) min."
-            } else {
+        if let executionTime = totalTime, totalTime != 0 {
+            return "\(String(executionTime)) min."
+        } else {
             return "No time."
-            }
         }
     }
+    
     var rank: String {
-        get {
-            return "No rank."
-            }
+        return "No rank."
     }
+    
     var sourceURL: String {
-        get {
-            if let originSourceURL = url {
-                return originSourceURL
-            } else {
-            return "No source provided"
-            }
-        }
+        return url ?? "No source URL."
     }
 }

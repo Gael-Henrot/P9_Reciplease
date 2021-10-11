@@ -40,7 +40,10 @@ class DetailsViewController: UIViewController {
         navigationItem.rightBarButtonItem = favoriteButton
         
         // Initialization of favoriteButton
-        if ((favoritesManager?.recipeIsFavorite(selectedRecipeUnwrapped)) != nil) {
+        guard let favoritesManager = favoritesManager else {
+            return
+        }
+        if favoritesManager.recipeIsFavorite(selectedRecipeUnwrapped) {
             favoriteButton.isFavorite = true
         } else {
             favoriteButton.isFavorite = false
@@ -60,7 +63,13 @@ class DetailsViewController: UIViewController {
     
     private func configureDetailsView(with recipe: RecipeProtocol) {
         var ingredientsListToDisplay: String = ""
-        recipeImage.sd_setImage(with: URL(string: recipe.imageURL), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
+        
+        if recipe.imageURL != "No image." {
+            recipeImage.sd_setImage(with: URL(string: recipe.imageURL), placeholderImage: UIImage(systemName: "photo"), options: .continueInBackground, completed: nil)
+        } else {
+            guard let defaultImage = UIImage(named: "Recipe Default Image") else { return }
+            recipeImage.image = defaultImage
+        }
         recipeTitleLabel.text = recipe.title
         rankLabel.text = recipe.rank
         timeLabel.text = recipe.executionTime

@@ -36,13 +36,13 @@ class RecipeProvider {
     
     //MARK: - Methods
     /// Asks for a list of recipe from the API Edanam and provides an array of RecipeData.
-    func fetchRecipes(firstcall: Bool = true, with ingredientsList: [String]? = nil, loading: Bool = false, completionHandler: @escaping (Result<[RecipeData], RecipeError>) -> Void) {
+    func fetchRecipes(firstcall: Bool = true, with ingredientsList: [String]? = nil, loading: Bool = false, completionHandler: @escaping (Result<[Recipe], RecipeError>) -> Void) {
  
         if loading {
             self.isLoadingRecipes = true
         }
         
-        var recipesList: [RecipeData] = []
+        var recipesList: [Recipe] = []
         
         var url: String {
             get {
@@ -101,19 +101,9 @@ class RecipeProvider {
                         self?.isLoadingRecipes = false
                         return completionHandler(.failure(.noRecipeFound))
                     }
-                    
-                    // Creates the simplified ingredients list for this recipe
-                    var simplifiedIngredientsList = [String]()
-                    guard let ingredients = recipe.ingredients else { return }
-                    for eachIngredient in ingredients {
-                        guard let description = eachIngredient.food else { return }
-                        simplifiedIngredientsList.append(description)
-                    }
-                    // Creation of the unit recipe object (one by recipe)
-                    let recipeData = RecipeData(title: recipe.title, imageURL: recipe.imageURL, ingredientsList: simplifiedIngredientsList, detailedIngredientsList: recipe.detailedIngredientsList, executionTime: recipe.executionTime, rank: recipe.rank, sourceURL: recipe.sourceURL)
                     guard let nextPageURL = recipeList.links?.next?.href else { return }
                     self?.nextPageURL = nextPageURL
-                    recipesList.append(recipeData)
+                    recipesList.append(recipe)
                 }
                 completionHandler(.success(recipesList))
                 if loading {
