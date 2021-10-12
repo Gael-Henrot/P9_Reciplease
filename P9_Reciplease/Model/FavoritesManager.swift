@@ -74,5 +74,6 @@ class FavoritesManager {
         guard results.isEmpty == false else { return }
         let recipeToDelete = results[0]
         coreDataStack.mainContext.delete(recipeToDelete)
+        coreDataStack.saveContext()
     }
 }

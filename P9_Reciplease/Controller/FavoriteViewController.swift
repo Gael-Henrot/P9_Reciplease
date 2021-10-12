@@ -29,8 +29,10 @@ class FavoriteViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        if favoritesManager?.favorites == nil {
+        guard let favoritesManager = favoritesManager else {
+            return
+        }
+        if favoritesManager.favorites.isEmpty {
             tableView.tableHeaderView = createHeader()
         } else {
             tableView.tableHeaderView = nil
@@ -55,7 +57,7 @@ class FavoriteViewController: UITableViewController {
     private func createHeader() -> UIView {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
         let adviceLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
-        adviceLabel.backgroundColor = .brown //UIColor(displayP3Red: 55, green: 51, blue: 50, alpha: 1)
+        adviceLabel.backgroundColor = .systemGreen //UIColor(displayP3Red: 55, green: 51, blue: 50, alpha: 1)
         adviceLabel.numberOfLines = 0
         adviceLabel.text = "To add a recipe in the favorites, search some recipes, select the desired recipe and tapped the star ☆ in the upper right corner."
         adviceLabel.textColor = .white
