@@ -41,4 +41,15 @@ class FavoritesManagerTestCases: XCTestCase {
         favoritesManager.managesFavoriteRecipe(recipe: recipe)
         XCTAssert(favoritesManager.favorites.isEmpty == true)
     }
+    
+    func testGivenTheFavoritesContainsTheRecipe_WhenRecipeIsFavoriteIsCalled_ThenTheMethodShouldReturnTrue() {
+        favoritesManager.managesFavoriteRecipe(recipe: recipe)
+        let favorite = favoritesManager.recipeIsFavorite(recipe)
+        XCTAssertTrue(favorite)
+    }
+    
+    func testGivenTheFavoritesDoNotContainsTheRecipe_WhenRecipeIsFavoriteIsCalled_ThenTheMethodShouldReturnFalse() {
+        let favorite = favoritesManager.recipeIsFavorite(recipe)
+        XCTAssertFalse(favorite)
+    }
 }
