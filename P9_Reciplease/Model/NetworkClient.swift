@@ -17,8 +17,40 @@ class NetworkClient: NetworkClientType {
             .responseDecodable(of: T.self) { [weak self] response in
                 guard self != nil else { return }
                 switch response.result {
-                case .failure(_):
-                    callback(.failure(.requestError))
+                case .failure(let error):
+                    switch error {
+                    case .responseValidationFailed(reason: let reason):
+                        print("Response validation failed: \(error.localizedDescription)")
+                        print("Failure Reason: \(reason)")
+                        switch reason {
+                        case .dataFileNil, .dataFileReadFailed:
+                            print("No data provided by the server")
+                            callback(.failure(.noData))
+                        case .unacceptableStatusCode(code: let code):
+                            print("Response status code was unacceptable: \(code)")
+                                callback(.failure(.wrongStatusCode))
+                        default:
+                            print("A problem occurred during the request")
+                            callback(.failure(.requestError))
+                        }
+                    case .responseSerializationFailed(reason: let reason):
+                        print("Response serialization failed: \(error.localizedDescription)")
+                        print("Failure Reason: \(reason)")
+                        switch reason {
+                        case .inputFileNil, .inputDataNilOrZeroLength:
+                            print("No data")
+                            callback(.failure(.noData))
+                        case .jsonSerializationFailed, .decodingFailed:
+                            print("The data could not be decoded")
+                            callback(.failure(.decodingIssue))
+                        default:
+                            print("A problem occurred during the serialization")
+                            callback(.failure(.requestError))
+                        }
+                    default:
+                        print("A problem occurred during the API request")
+                        callback(.failure(.requestError))
+                    }
                 case .success(let response):
                     callback(.success(response))
                 }

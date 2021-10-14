@@ -76,19 +76,15 @@ class RecipeProvider {
             guard self != nil else { return }
             switch response {
             case .failure(NetworkError.requestError):
-                print("Request error")
                 self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .failure(.noData):
-                print("No data provided")
                 self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .failure(.wrongStatusCode):
-                print("Wrong status code")
                 self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .failure(.decodingIssue):
-                print("Trouble with decodable")
                 self?.isLoadingRecipes = false
                 return completionHandler(.failure(.noRecipeFound))
             case .success(let recipeList):
